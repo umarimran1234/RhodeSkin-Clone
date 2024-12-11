@@ -39,7 +39,7 @@ const Footer = () => {
 
           {/* Navigation Section */}
           <div>
-            <h2 className="font-semibold mb-4">NAVIGATE</h2>
+            <h2 className="font-bold mb-4">NAVIGATE</h2>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="hover:underline">
@@ -71,20 +71,41 @@ const Footer = () => {
 
           {/* Social Section */}
           <div>
-            <h2 className="font-semibold mb-4">SOCIAL</h2>
+            <h2 className="font-bold mb-4">SOCIAL</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline flex gap-2">
+                  <Image
+                    src={"/InstagramIcon.svg"}
+                    width={1000}
+                    height={1000}
+                    alt="Youtube Icon "
+                    className="w-4"
+                  ></Image>
                   Instagram
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline flex gap-2">
+                  <Image
+                    src={"/YoutubeIcon.svg"}
+                    width={1000}
+                    height={1000}
+                    alt="Youtube Icon "
+                    className="w-4"
+                  ></Image>{" "}
                   YouTube
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="#" className="hover:underline flex gap-2">
+                  <Image
+                    src={"/TiktokIcon.svg"}
+                    width={1000}
+                    height={1000}
+                    alt="Youtube Icon "
+                    className="w-4"
+                  ></Image>
                   TikTok
                 </a>
               </li>
@@ -93,7 +114,7 @@ const Footer = () => {
 
           {/* Official Section */}
           <div>
-            <h2 className="font-semibold mb-4">OFFICIAL</h2>
+            <h2 className="font-bold mb-4">OFFICIAL</h2>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="hover:underline">
@@ -130,7 +151,7 @@ const Footer = () => {
 
           {/* Support Section */}
           <div>
-            <h2 className="font-semibold mb-4">SUPPORT</h2>
+            <h2 className="font-bold mb-4">SUPPORT</h2>
             <ul className="space-y-2">
               <li>
                 <a href="#" className="hover:underline">
@@ -176,11 +197,10 @@ const Footer = () => {
 
         {/* Footer Bottom Section */}
         <div className="mt-8 border-t border-gray-300 pt-4 text-center md:text-left text-sm">
-          <p>
+          <p className="text-center">
             Country/region:{" "}
             <span className="font-semibold">United States (USD $)</span>
           </p>
-          <p className="mt-2">© rhode 2024</p>
         </div>
       </div>
     </footer>
