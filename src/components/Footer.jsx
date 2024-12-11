@@ -1,15 +1,12 @@
+import Image from "next/image";
 import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-gray-800">
+    <footer className="bg-gray-100 container mx-auto rounded-xl text-gray-800">
       <div className="max-w-screen-xl mx-auto px-4 py-8 md:py-12">
         {/* Logo Section */}
-        <div className="text-center md:text-left">
-          <h1 className="text-7xl md:text-8xl font-bold tracking-tight text-gray-800">
-            rhode
-          </h1>
-        </div>
+        <Image src={"/rhode.svg"} width={1000} height={1000} alt="Rhode svg" className="mx-auto" />
 
         <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Email Subscription Section */}
