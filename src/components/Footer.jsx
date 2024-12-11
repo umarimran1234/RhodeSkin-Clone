@@ -3,38 +3,42 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 container mx-auto rounded-xl text-gray-800">
+    <footer className="bg-gray-100 container mx-auto rounded-xl text-[#67645E]">
       <div className="max-w-screen-xl mx-auto px-4 py-8 md:py-12">
         {/* Logo Section */}
-        <Image src={"/rhode.svg"} width={1000} height={1000} alt="Rhode svg" className="mx-auto" />
+        <Image
+          src={"/rhode.svg"}
+          width={1000}
+          height={1000}
+          alt="Rhode svg"
+          className="mx-auto"
+        />
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-6 gap-4 border-t-2 pt-8 border-black font-medium">
           {/* Email Subscription Section */}
-          <div className="md:col-span-1">
-            <p className="text-sm">
-              Join us on the rhode to an effortless glow.
-            </p>
-            <p className="text-sm mt-2">
+          <div className="md:col-span-2 border-r-2 border-black">
+            <p className="">Join us on the rhode to an effortless glow.</p>
+            <p className="mt-2 w-11/12">
               Glaze your inbox with tips, tricks & exclusive content from
               Hailey.
             </p>
-            <div className="mt-4 flex items-center">
+            <div className="mt-4 w-11/12 flex items-center">
               <input
                 type="email"
                 placeholder="Email Address"
-                className="flex-1 px-4 py-2 border border-gray-300 rounded-l-md focus:outline-none focus:ring focus:ring-gray-300"
+                className="flex-1 px-4 py-2 border-r border-gray-300 rounded-l-md focus:outline-none focus:ring focus:ring-gray-300 placeholder:text-[#67645E] placeholder:text-[18px]"
               />
-              <button className="px-4 py-2 bg-gray-800 text-white font-semibold rounded-r-md hover:bg-gray-700">
+              <button className="px-4 py-2 bg-white text-[#67645E] font-semibold rounded-r-md hover:bg-gray-700">
                 SUBSCRIBE
               </button>
             </div>
-            <p className="text-xs mt-2">
+            <p className="mt-2 text-[#67645E]">
               By signing up, you agree to our Privacy Policy*.
             </p>
           </div>
 
           {/* Navigation Section */}
-          <div className="md:col-span-1">
+          <div>
             <h2 className="font-semibold mb-4">NAVIGATE</h2>
             <ul className="space-y-2">
               <li>
@@ -66,7 +70,7 @@ const Footer = () => {
           </div>
 
           {/* Social Section */}
-          <div className="md:col-span-1">
+          <div>
             <h2 className="font-semibold mb-4">SOCIAL</h2>
             <ul className="space-y-2">
               <li>
@@ -87,8 +91,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Official & Support Section */}
-          <div className="md:col-span-1">
+          {/* Official Section */}
+          <div>
             <h2 className="font-semibold mb-4">OFFICIAL</h2>
             <ul className="space-y-2">
               <li>
@@ -122,14 +126,51 @@ const Footer = () => {
                 </a>
               </li>
             </ul>
-            <h2 className="font-semibold mt-6 mb-4">SUPPORT</h2>
-            <p className="text-sm">We’re here M-F 9am - 5pm PST.</p>
-            <p className="text-sm mt-2">
-              Drop us a note anytime:{" "}
-              <a href="mailto:hello@rhodeskin.com" className="underline">
-                hello@rhodeskin.com
-              </a>
-            </p>
+          </div>
+
+          {/* Support Section */}
+          <div>
+            <h2 className="font-semibold mb-4">SUPPORT</h2>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="hover:underline">
+                  We’re here M-F 9am - 5pm PST.
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  Drop us a note anytime:
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  hello@rhodeskin.com
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  Do Not Sell or Share My Personal Information
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  Cookie Preferences
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:underline">
+                  © rhode 2024
+                </a>
+              </li>
+              <li>
+                <Image
+                  src={"/AfterPay.avif"}
+                  width={1000}
+                  height={1000}
+                  alt="After Pay Image"
+                ></Image>
+              </li>
+            </ul>
           </div>
         </div>
 
