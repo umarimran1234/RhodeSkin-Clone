@@ -14,21 +14,21 @@ const Footer = () => {
           className="mx-auto"
         />
 
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-6 gap-4 border-t-2 pt-8 border-black font-medium">
+        <div className="mt-8 grid grid-cols-1 lg:grid-cols-6 md:grid-cols-3 gap-4 border-t-2 pt-8 border-black font-medium">
           {/* Email Subscription Section */}
-          <div className="md:col-span-2 border-r-2 border-black">
+          <div className="md:col-span-2 md:border-r-2 border-black">
             <p className="">Join us on the rhode to an effortless glow.</p>
             <p className="mt-2 w-11/12">
               Glaze your inbox with tips, tricks & exclusive content from
               Hailey.
             </p>
-            <div className="mt-4 w-11/12 flex items-center">
+            <div className="mt-4 md:w-11/12 flex md:flex-row flex-col md:items-center">
               <input
                 type="email"
                 placeholder="Email Address"
-                className="flex-1 px-4 py-2 border-r border-gray-300 rounded-l-md focus:outline-none focus:ring focus:ring-gray-300 placeholder:text-[#67645E] placeholder:text-[18px]"
+                className="flex-1 px-4 py-2 border-r border-gray-300 rounded-l-md focus:outline-none focus:ring focus:ring-gray-300 placeholder:text-[#67645E] placeholder:text-[18px] md:placeholder:text-left placeholder:text-center"
               />
-              <button className="px-4 py-2 bg-white text-[#67645E] font-semibold rounded-r-md hover:bg-gray-700">
+              <button className="px-4 py-2 md:mt-0 mt-2 bg-white text-[#67645E] font-semibold rounded-r-md hover:bg-gray-700">
                 SUBSCRIBE
               </button>
             </div>
