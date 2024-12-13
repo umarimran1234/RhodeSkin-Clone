@@ -10,20 +10,19 @@ const RestoreSection = () => {
             TO RESTORE and NURTURE the skin you have now for lasting results
             that reveal themselves over time.
           </h2>
-          <button className="text-xl text-[#67645E] rounded-xl border-2 font-bold mb-4">OUR VALUES</button>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="text-center">
-              <p className="text-lg font-bold mb-2">mission</p>
-              <p className="text-gray-500">...</p>
-            </div>
-            <div className="text-center">
-              <p className="text-lg font-bold mb-2">philanthropy</p>
-              <p className="text-gray-500">...</p>
-            </div>
-            <div className="text-center">
-              <p className="text-lg font-bold mb-2">sustainability</p>
-              <p className="text-gray-500">...</p>
-            </div>
+          <button className="text-lg text-[#67645E] border-[#67645E] rounded-3xl border-2 font-medium px-6 py-1 mb-4">
+            OUR VALUES
+          </button>
+          <div className="flex flex-col mt-44 text-[#67645E] gap-4">
+            <p className="text-[26px] border-t-[1px] border-[#67645E] font-bold mb-2">
+              mission
+            </p>
+            <p className="text-[26px] border-t-[1px] border-[#67645E] font-bold mb-2">
+              philanthropy
+            </p>
+            <p className="text-[26px] border-t-[1px] border-[#67645E] font-bold mb-2">
+              sustainability
+            </p>
           </div>
         </div>
         <Image
