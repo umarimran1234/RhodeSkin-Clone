@@ -13,15 +13,18 @@ const Slider = () => {
     "/FifthImg.webp",
   ];
 
+  const itemsPerView = 4; // Number of images visible at a time
+  const totalSlides = 2; // Total number of "pages"
+
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+      prevIndex === 0 ? totalSlides - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+      prevIndex === totalSlides - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -41,11 +44,13 @@ const Slider = () => {
           <div
             className="flex transition-transform duration-500"
             style={{
-              transform: `translateX(-${currentIndex * 100}%)`,
+              transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
+              // Translate by a fraction of total width
+              width: `${(images.length / itemsPerView) * 100}%`,
             }}
           >
             {images.map((image, index) => (
-              <div key={index} className="flex-none w-full lg:w-1/4 px-2">
+              <div key={index} className="flex-none w-full md:w-1/4 px-2">
                 <img
                   src={image}
                   alt={`Slide ${index + 1}`}
