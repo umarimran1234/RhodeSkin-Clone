@@ -42,7 +42,7 @@ const Slider = () => {
         {/* Slider */}
         <div className="overflow-hidden">
           <div
-            className="flex transition-transform duration-500"
+            className="flex md:flex-row md:gap-0 gap-4 flex-col transition-transform duration-500"
             style={{
               transform: `translateX(-${currentIndex * (100 / totalSlides)}%)`,
               // Translate by a fraction of total width
@@ -61,7 +61,7 @@ const Slider = () => {
           </div>
 
           {/* Navigation Arrows */}
-          <div className="absolute bottom-3 right-16 flex space-x-2">
+          <div className="absolute hidden bottom-3 right-16 md:flex space-x-2">
             <button
               onClick={handlePrev}
               className="w-8 h-8 flex items-center justify-center rounded-full border border-black hover:bg-white transition"
