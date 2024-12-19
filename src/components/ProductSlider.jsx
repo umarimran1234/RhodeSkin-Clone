@@ -1,8 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
-import { IoIosArrowForward } from "react-icons/io";
-import { IoIosStar } from "react-icons/io";
+import { IoIosArrowBack, IoIosArrowForward, IoIosStar } from "react-icons/io";
 
 const ProductSlider = () => {
   const stars = [1, 2, 3, 4, 5];
@@ -92,44 +90,51 @@ const ProductSlider = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const nextSlide = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 3) % cards.length);
-  };
-
   const prevSlide = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 3 + cards.length) % cards.length
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? cards.length - 1 : prevIndex - 1
     );
   };
 
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === cards.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  // Determine which cards to display
+  const visibleCards = [
+    cards[(currentIndex - 1 + cards.length) % cards.length], // Previous card
+    cards[currentIndex], // Current card
+    cards[(currentIndex + 1) % cards.length], // Next card
+  ];
+
   return (
-    <div className="relative w-full max-w-7xl mx-auto overflow-hidden">
-      <div
-        className="flex transition-transform duration-500 ease-in-out"
-        style={{ transform: `translateX(-${(currentIndex / 3) * 100}%)` }}
-      >
-        {cards.map((card, index) => (
-          <div key={index} className="md:min-w-[33.3333%] p-4">
-            <div className="bg-gray-100 lg:h-[75vh] md:h-[90vh] h-[95vh] text-[#67645E] rounded-lg shadow-lg p-6">
+    <div className="relative w-full max-w-7xl mx-auto">
+      <div className="flex md:flex-row flex-col justify-center items-center gap-4">
+        {visibleCards.map((card, index) => (
+          <div
+            key={index}
+            className="flex-shrink-0 md:w-[30%] p-4 transition-transform duration-500"
+          >
+            <div className="bg-gray-100 lg:h-[78vh] md:h-[94vh] text-[#67645E] rounded-lg shadow-lg p-6">
               <h3 className="text-[4vw] font-bold mb-2">{card.title}</h3>
               <img
                 src={card.image}
                 alt={card.product}
                 className="w-full h-[40vh] object-cover mb-4"
               />
-              <div className="flex lg:flex-row flex-col justify-between">
-                <div>
-                  <p className=" flex items-center font-medium gap-1">
-                    {stars.map((index) => (
-                      <IoIosStar key={index} />
-                    ))}{" "}
-                    ({card.reviews})
-                  </p>
-                  <p className="text-[17px] uppercase font-semibold">
-                    {card.product}
-                  </p>
-                  <p className="font-medium">{card.subtitle}</p>
-                </div>
+              <div className="flex flex-col justify-between">
+                <p className="flex items-center font-medium gap-1">
+                  {stars.map((starIndex) => (
+                    <IoIosStar key={starIndex} />
+                  ))}{" "}
+                  ({card.reviews})
+                </p>
+                <p className="text-[17px] uppercase font-semibold">
+                  {card.product}
+                </p>
+                <p className="font-medium">{card.subtitle}</p>
                 <p className="text-lg font-bold mt-4">{card.price}</p>
               </div>
             </div>
