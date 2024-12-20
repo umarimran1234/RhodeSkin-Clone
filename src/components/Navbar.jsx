@@ -25,7 +25,7 @@ const Navbar = () => {
         show ? "block" : "hidden"
       } bg-transparent fixed w-full top-0 z-10 transition-all duration-300 container mx-auto text-white font-bold`}
     >
-      <ul className="flex items-center justify-center p-4 space-x-10">
+      <ul className="flex md:flex-row flex-col space-y-2 md:space-y-0 md:items-center md:justify-center items-end p-4 lg:space-x-10 md:space-x-7">
         <li>
           <a href="#shop">SHOP</a>
         </li>
@@ -35,7 +35,7 @@ const Navbar = () => {
         <li>
           <a href="#futures">FUTURES</a>
         </li>
-        <li className="px-56">
+        <li className="lg:px-56">
           <a href="#futures" className="text-5xl">
             rhode
           </a>
