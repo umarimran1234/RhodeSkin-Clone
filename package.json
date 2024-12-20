@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "next": "15.1.0",
+    "next-video": "^1.4.0",
+    "next-videos": "^1.4.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.4.0"
