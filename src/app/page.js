@@ -1,12 +1,19 @@
+import GoodCallSection from "@/components/GoodCallSection";
 import HolidaySection from "@/components/HolidaySection";
-import ProductCard from "@/components/ProductCard";
+
+import ProductSlider from "@/components/ProductSlider";
+
 import RestoreSection from "@/components/RestoreSection";
 import SideToSideSection from "@/components/SideToSideSection";
 import Slider from "@/components/SliderSection";
+import TravelSection from "@/components/TravelSection";
 
 export default function Home() {
   return (
     <>
+      <ProductSlider />
+      <GoodCallSection />
+      <TravelSection />
       <HolidaySection />
       <Slider />
       <RestoreSection />
