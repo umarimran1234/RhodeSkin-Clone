@@ -1,3 +1,4 @@
+import Announcement from "@/components/Announcement";
 import GoodCallSection from "@/components/GoodCallSection";
 import HeroSection from "@/components/HeroSection";
 import HolidaySection from "@/components/HolidaySection";
@@ -9,6 +10,7 @@ import TravelSection from "@/components/TravelSection";
 export default function Home() {
   return (
     <>
+      <Announcement />
       <HeroSection />
       <ProductSlider />
       <GoodCallSection />

@@ -23,7 +23,7 @@ const Navbar = () => {
     <nav
       className={`${
         show ? "block" : "hidden"
-      } bg-transparent fixed w-full top-0 z-10 transition-all duration-300 container mx-auto text-white font-bold`}
+      } bg-transparent fixed w-full top-16 z-10 transition-all duration-300 container mx-auto text-white font-bold`}
     >
       <ul className="flex md:flex-row flex-col space-y-2 md:space-y-0 md:items-center md:justify-center items-end p-4 lg:space-x-10 md:space-x-7">
         <li>
