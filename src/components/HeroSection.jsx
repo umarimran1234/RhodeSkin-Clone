@@ -1,22 +1,27 @@
-import React from "react";
+import Navbar from "./Navbar";
 
-function HeroSection() {
+const HeroSection = () => {
   return (
     <div className="container mx-auto">
-      <div className=" bg-center h-screen rounded-xl flex justify-center items-end py-8">
+      <Navbar />
+      <div className="relative h-screen">
         <video
-          className="absolute  top-0 left-0 w-full h-full object-cover z-0"
-          src={require("../../public/DashboardVideo.mp4")}
+          className="absolute rounded-xl top-0 left-0 w-full h-full object-cover"
+          src="/HeroSectionVideo.mp4"
           autoPlay
           loop
           muted
-        ></video>
-        <button className="border h-[35px] border-white text-white px-4 py-1 rounded-full hover:bg-white hover:text-gray-500 font-medium transition">
-          THE HOLIDAY SHOP
-        </button>
+        />
+        <div className="absolute bottom-10 left-10 text-white">
+          <h1 className="font-bold">rhode muses</h1>
+          <h2 className="text-[34px]">Meet Yoonji Bae.</h2>
+          <button className="border w-2/3 h-[35px] px-4 py-1 rounded-full hover:bg-white hover:text-gray-500 font-medium transition">
+            SHOP HER FAVES
+          </button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default HeroSection;
