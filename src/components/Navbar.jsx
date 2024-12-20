@@ -28,7 +28,7 @@ const Navbar = () => {
     <nav
       className={`${
         show ? "translate-y-9 bg-[#67645E]" : " -translate-y-60 bg-[#67645E] "
-      } bg-transparent fixed w-full top-5 z-10 transition-all duration-300 container mx-auto text-white font-bold`}
+      }  fixed w-full top-5 z-10 transition-all rounded duration-300 container mx-auto text-white font-bold`}
     >
       <div className="flex md:hidden justify-between items-center p-4">
         <a href="#futures" className="text-5xl lg:px-56">
