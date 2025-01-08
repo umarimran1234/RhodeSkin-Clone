@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const LoginPage = () => {
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto my-10">
       <div className="flex flex-col lg:flex-row items-center lg:items-stretch min-h-screen bg-gray-50">
         {/* Left Section with Image */}
         <div className="relative lg:w-1/2 w-full h-80 lg:h-auto">
@@ -47,7 +47,7 @@ const LoginPage = () => {
               <div className="flex justify-center">
                 <button
                   type="button"
-                  className="w-1/4 py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
+                  className="md:w-1/4 w-full py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
                 >
                   SIGN IN
                 </button>
@@ -58,15 +58,15 @@ const LoginPage = () => {
             <div className="mt-4 text-center space-y-2">
               <a
                 href="#"
-                className="text-sm text-gray-500 hover:text-gray-700 transition underline"
+                className="text-[#67645E] font-medium transition underline"
               >
                 Forgot your password?
               </a>
-              <p className="text-sm text-gray-500">
+              <p className="text-[#67645E] font-medium">
                 Don’t have an account?{" "}
                 <a
                   href="#"
-                  className="font-semibold text-gray-700 hover:underline"
+                  className="font-semibold text-[#67645E] underline"
                 >
                   Sign up!
                 </a>
