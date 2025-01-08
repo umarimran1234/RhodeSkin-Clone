@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const LoginPage = () => {
   return (
@@ -64,12 +65,12 @@ const LoginPage = () => {
               </a>
               <p className="text-[#67645E] font-medium">
                 Don’t have an account?{" "}
-                <a
-                  href="#"
+                <Link
+                  href="/account/register"
                   className="font-semibold text-[#67645E] underline"
                 >
                   Sign up!
-                </a>
+                </Link>
               </p>
             </div>
           </div>
