@@ -79,9 +79,9 @@ const Navbar = () => {
           <a href="#futures">FUTURES</a>
         </li>
         <li className="hidden md:block lg:px-56">
-          <a href="#futures" className="text-5xl">
+          <Link href="/" className="text-5xl">
             rhode
-          </a>
+          </Link>
         </li>
         <li>
           <a href="#search">SEARCH</a>
