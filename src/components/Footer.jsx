@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -6,13 +7,19 @@ const Footer = () => {
     <footer className="bg-gray-100 container mx-auto rounded-xl text-[#67645E]">
       <div className="max-w-screen-xl mx-auto px-4 py-8 md:py-12">
         {/* Logo Section */}
-        <Image
-          src={"/rhode.svg"}
+        {/* <Image
+          src={"/zalmarsvg.svg"}
           width={1000}
           height={1000}
           alt="Rhode svg"
           className="mx-auto"
-        />
+        /> */}
+        <div className="flex justify-center items-center ">
+          <h1 className=" text-black text-9xl  ">
+            {" "}
+            <span className=" text-black font-bold "> zal</span>mar
+          </h1>
+        </div>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-6 md:grid-cols-3 gap-4 border-t-2 pt-8 border-black font-medium">
           {/* Email Subscription Section */}
@@ -198,8 +205,13 @@ const Footer = () => {
         {/* Footer Bottom Section */}
         <div className="mt-8 border-t border-gray-300 pt-4 text-center md:text-left text-sm">
           <p className="text-center">
-            Country/region:
-            <span className="font-semibold"> Pakistan (PKR)</span>
+            created by {""}
+            <Link
+              href={"https://code-sphare-com.vercel.app/"}
+              className="font-semibold"
+            >
+              codesphere Innvation{" "}
+            </Link>
           </p>
         </div>
       </div>
