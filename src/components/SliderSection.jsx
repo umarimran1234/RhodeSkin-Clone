@@ -33,7 +33,7 @@ const Slider = () => {
       <div className="bg-[#efefef] relative py-14 px-4 lg:px-16 rounded-xl">
         {/* Header */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-[34px] font-bold text-[#67645E]">you + rhode</h2>
+          <h2 className="text-[34px] font-bold text-[#67645E]">you + zalmar</h2>
           <button className="border border-[#67645E] text-[#67645E] px-4 py-1 rounded-full hover:bg-gray-200 font-medium transition">
             FIND US ON SOCIAL
           </button>

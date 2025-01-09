@@ -13,7 +13,7 @@ const HeroSection = () => {
           muted
         />
         <div className="absolute bottom-10 left-10 text-white">
-          <h1 className="font-bold">rhode muses</h1>
+          <h1 className="font-bold">zalmar muses</h1>
           <h2 className="text-[34px]">Meet Yoonji Bae.</h2>
           <button className="border w-2/3 h-[35px] px-4 py-1 rounded-full hover:bg-white hover:text-gray-500 font-medium transition">
             SHOP HER FAVES

@@ -180,7 +180,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  © rhode 2024
+                  © zalmar {new Date().getFullYear()}
                 </a>
               </li>
               <li>
@@ -198,8 +198,8 @@ const Footer = () => {
         {/* Footer Bottom Section */}
         <div className="mt-8 border-t border-gray-300 pt-4 text-center md:text-left text-sm">
           <p className="text-center">
-            Country/region:{" "}
-            <span className="font-semibold">United States (USD $)</span>
+            Country/region:
+            <span className="font-semibold"> Pakistan (PKR)</span>
           </p>
         </div>
       </div>

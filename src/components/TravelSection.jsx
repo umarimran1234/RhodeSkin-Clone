@@ -22,7 +22,7 @@ const TravelSection = () => {
           <p className="text-[#67645E] font-medium my-4">
             Our new little sizes of Pineapple Refresh and Glazing Milk have
             arrived. Same nourishing formulas, just a little smaller. Get them
-            solo or in the Travel Set to take your rhode routine on the go.
+            solo or in the Travel Set to take your zalmar routine on the go.
           </p>
           <button className="border lg:w-1/3 md:w-1/2 w-2/3 h-[35px] border-[#67645E] text-[#67645E] px-4 py-1 rounded-full hover:bg-white hover:text-gray-500 font-medium transition">
             THE TRAVEL SET

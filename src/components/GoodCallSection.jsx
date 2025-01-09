@@ -20,7 +20,7 @@ const GoodCallSection = () => {
             text. treat. tint.
           </h3>
           <p className="text-[#67645E] md:w-2/3 font-medium my-4">
-            Take rhode with you everywhere this winter. The Lip Case is
+            Take zalmar with you everywhere this winter. The Lip Case is
             compatible with iPhone and your favorite Peptide Lip Treatment or
             Tint.
           </p>
