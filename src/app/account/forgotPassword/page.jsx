@@ -3,27 +3,27 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/Config/firebaseConfig"; // Firebase configuration file import
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { sendPasswordResetEmail } from "firebase/auth";
 
-const LoginPage = () => {
+const ForGotPAssword = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  const handleForgotPassword = async (e) => {
     e.preventDefault();
+    setMessage("");
     setError("");
     setLoading(true);
 
     try {
-      // Firebase authentication function
-      await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful! 🎉");
-      // Navigate to dashboard or desired page
+      // Send password reset email
+      await sendPasswordResetEmail(auth, email);
+      setMessage("Password reset email sent successfully! Check your inbox.");
     } catch (err) {
       // Show error message
-      setError(err.message || "Failed to log in. Please try again.");
+      setError(err.message || "Failed to send reset email. Please try again.");
     } finally {
       setLoading(false); // Stop loading spinner
     }
@@ -51,53 +51,48 @@ const LoginPage = () => {
           <div className="w-full max-w-md">
             {/* Form Title */}
             <h1 className="text-2xl lg:text-5xl font-bold text-[#67645E] mb-6 text-center">
-              Login
+              Forgot Password
             </h1>
 
-            {/* Error Message */}
+            {/* Success or Error Message */}
+            {message && (
+              <div className="text-green-500 text-center mb-4">{message}</div>
+            )}
             {error && (
               <div className="text-red-500 text-center mb-4">{error}</div>
             )}
 
             {/* Form Inputs */}
-            <form className="space-y-4" onSubmit={handleLogin}>
+            <form className="space-y-4" onSubmit={handleForgotPassword}>
               <div>
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="Enter your email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
-                />
-              </div>
-              <div>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
+                  required
                 />
               </div>
               <div className="flex justify-center">
                 <button
                   type="submit"
                   disabled={loading}
-                  className="md:w-1/4 w-full py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
+                  className="md:w-2/4 w-full py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
                 >
-                  {loading ? "Signing In..." : "SIGN IN"}
+                  {loading ? "Sending..." : "Send Reset Email"}
                 </button>
               </div>
             </form>
 
             {/* Additional Links */}
             <div className="mt-4 text-center space-y-2">
-              <a
-                href="#"
+              <Link
+                href="/login"
                 className="text-[#67645E] font-medium transition underline"
               >
-                Forgot your password?
-              </a>
+                Back to Login
+              </Link>
               <p className="text-[#67645E] font-medium">
                 Don’t have an account?{" "}
                 <Link
@@ -115,4 +110,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default ForGotPAssword;

@@ -3,6 +3,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import Announcement from "@/components/Announcement";
 import Navbar from "@/components/Navbar";
+import HeaderAndFooter from "@/components/HeaderFooter";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Announcement />
-        <div className="container mx-auto">
-          <Navbar />
-        </div>
-        {children}
-        <Footer />
+        <HeaderAndFooter>{children}</HeaderAndFooter>
       </body>
     </html>
   );

@@ -1,7 +1,13 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", // Root folder se imports ko enable kare
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+      "@/*": ["./src/*"] // Aliases ke liye paths define kare
+    },
+    "jsx": "react-jsx", // React JSX support ke liye
+    "allowJs": true, // JavaScript aur JSX files ko allow kare
+    "checkJs": false // JavaScript files ko type check na kare
+  },
+  "include": ["src"], // Sirf src folder include kare
+  "exclude": ["node_modules"] // node_modules ko exclude kare
 }

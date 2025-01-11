@@ -1,14 +1,66 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { auth, db } from "@/Config/firebaseConfig"; // Ensure firebaseConfig exports `db`
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { collection, addDoc } from "firebase/firestore";
 
 const RegisterPage = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  console.log({
+    firstName,
+    lastName,
+    email,
+    uid: 12323,
+    createdAt: new Date(),
+  });
+
+  const handleRegister = async () => {
+    if (!firstName || !lastName || !email || !password) {
+      setError("All fields are required!");
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+      const userDoc = {
+        firstName,
+        lastName,
+        email,
+        uid: userCredential.user.uid,
+        createdAt: new Date(),
+      };
+      await addDoc(collection(db, "users"), userDoc);
+
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+      setSuccess("Account created successfully!");
+      setError("");
+    } catch (err) {
+      console.error(err);
+      setError(err.message || "Failed to create account.");
+      setSuccess("");
+    }
+  };
+
   return (
     <div className="container mx-auto my-10">
       <div className="flex flex-col lg:flex-row items-center lg:items-stretch min-h-screen bg-gray-50">
         {/* Left Section with Image */}
         <div className="relative lg:w-1/2 w-full h-80 lg:h-auto">
-          {/* Replace '/path-to-your-image.jpg' with the actual image URL */}
           <Image
             src="/LoginImg.webp"
             alt="Skin Care"
@@ -30,11 +82,13 @@ const RegisterPage = () => {
             </h1>
 
             {/* Form Inputs */}
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
               <div>
                 <input
                   type="text"
                   placeholder="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
@@ -42,6 +96,8 @@ const RegisterPage = () => {
                 <input
                   type="text"
                   placeholder="Last Name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                   className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
@@ -49,6 +105,8 @@ const RegisterPage = () => {
                 <input
                   type="email"
                   placeholder="Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
@@ -56,12 +114,19 @@ const RegisterPage = () => {
                 <input
                   type="password"
                   placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
+              {error && <p className="text-red-500 text-center">{error}</p>}
+              {success && (
+                <p className="text-green-500 text-center">{success}</p>
+              )}
               <div className="flex justify-center">
                 <button
                   type="button"
+                  onClick={handleRegister}
                   className="md:w-1/4 w-full py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
                 >
                   REGISTER
