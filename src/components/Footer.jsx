@@ -15,7 +15,7 @@ const Footer = () => {
           className="mx-auto"
         /> */}
         <div className="flex justify-center items-center ">
-          <h1 className=" text-black text-9xl  ">
+          <h1 className=" text-black md:text-9xl text-7xl">
             {" "}
             <span className=" text-black font-bold "> zal</span>mar
           </h1>
