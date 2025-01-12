@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const Checkout = () => {
@@ -16,16 +17,36 @@ const Checkout = () => {
               <span>Shipping</span> &gt; <span>Payment</span>
             </nav>
           </div>
-          <h2 className="text-lg font-medium mb-4">Express checkout</h2>
+          <h2 className="text-lg text-center font-medium mb-4">
+            Express checkout
+          </h2>
           <div className="flex space-x-4 mb-8">
-            <button className="w-full py-2 bg-indigo-600 text-white font-medium rounded">
-              Shop Pay
+            <button className="w-full py-1 flex justify-center bg-indigo-600 text-white font-medium rounded">
+              <Image
+                src={"/ShopPay.svg"}
+                width={200}
+                height={200}
+                alt="Shop Pay svg"
+                className="md:w-[100px] w-[70px] h-[48px]"
+              ></Image>
             </button>
-            <button className="w-full py-2 bg-yellow-400 text-black font-medium rounded">
-              PayPal
+            <button className="w-full py-1 flex justify-center items-center bg-yellow-400 text-black font-medium rounded">
+              <Image
+                src={"/Paypal.svg"}
+                width={200}
+                height={200}
+                alt="Shop Pay svg"
+                className="md:w-[100px] w-[70px] h-[48px]"
+              ></Image>
             </button>
-            <button className="w-full py-2 bg-black text-white font-medium rounded">
-              G Pay
+            <button className="w-full py-1 flex justify-center items-center bg-black text-white font-medium rounded">
+              <Image
+                src={"/GPay.png"}
+                width={200}
+                height={200}
+                alt="Shop Pay svg"
+                className="md:w-[100px] w-[70px] h-[35px]"
+              ></Image>
             </button>
           </div>
           <div className="text-center text-gray-500 mb-6">OR</div>
@@ -112,9 +133,9 @@ const Checkout = () => {
             </div>
 
             <div className="flex justify-between items-center">
-              <a href="#" className="text-sm text-gray-600">
+              <Link href="#" className="text-sm text-gray-600">
                 Return to cart
-              </a>
+              </Link>
               <button className="bg-gray-800 text-white py-2 px-4 rounded">
                 Continue to shipping
               </button>
@@ -132,7 +153,7 @@ const Checkout = () => {
             <p className="text-sm text-gray-700">$30.00</p>
           </div>
 
-          <div className="flex items-center space-x-4 mb-6">
+          <div className="flex md:flex-row flex-col md:gap-0 gap-4 items-center space-x-4 mb-6">
             <input
               type="text"
               placeholder="Discount code or gift card"
