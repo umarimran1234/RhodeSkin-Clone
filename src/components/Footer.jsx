@@ -15,8 +15,7 @@ const Footer = () => {
           className="mx-auto"
         /> */}
         <div className="flex justify-center items-center ">
-          <h1 className=" text-black text-9xl  ">
-            {" "}
+          <h1 className=" text-black text-7xl lg:text-9xl  ">
             <span className=" text-black font-bold "> zal</span>mar
           </h1>
         </div>
@@ -172,7 +171,7 @@ const Footer = () => {
               </li>
               <li>
                 <a href="#" className="hover:underline">
-                  hello@rhodeskin.com
+                  StoreZalmar@gmail.com
                 </a>
               </li>
               <li>

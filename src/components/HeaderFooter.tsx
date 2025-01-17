@@ -3,6 +3,7 @@ import { usePathname } from "next/navigation";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import Announcement from "./Announcement";
+import { UserProvider } from "@/authContaxt/authContxt";
 
 export default function HeaderAndFooter({
   children,
@@ -12,26 +13,27 @@ export default function HeaderAndFooter({
   const pathname = usePathname();
 
   // Define routes where Header and Footer should not appear
-  const noHeaderFooterRoutes = ["/admin"];
+  const noHeaderFooterRoutes = ["/admin", "/admin/product_list"];
   const shouldHideHeaderFooter = noHeaderFooterRoutes.includes(pathname);
 
   return (
     <>
-      {/* Render Navbar and Announcement if not hidden */}
-      {!shouldHideHeaderFooter && (
-        <>
-          <Announcement />
-          <div className="container mx-auto">
-            <Navbar />
-          </div>
-        </>
-      )}
+      <UserProvider>
+        {!shouldHideHeaderFooter && (
+          <>
+            <Announcement />
+            <div className="container mx-auto">
+              <Navbar />
+            </div>
+          </>
+        )}
 
-      {/* Main Content */}
-      <main>{children}</main>
+        {/* Main Content */}
+        <main>{children}</main>
 
-      {/* Render Footer if not hidden */}
-      {!shouldHideHeaderFooter && <Footer />}
+        {/* Render Footer if not hidden */}
+        {!shouldHideHeaderFooter && <Footer />}
+      </UserProvider>
     </>
   );
 }

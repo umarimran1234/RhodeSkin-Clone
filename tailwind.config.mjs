@@ -10,6 +10,9 @@ const config = {
       backgroundImage: {
         "holiday-section-img": "url('/HolidaySectionImg.webp')",
       },
+      animation: {
+        "spin-slow": "spin 3s linear infinite",
+      },
     },
   },
   plugins: [],

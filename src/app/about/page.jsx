@@ -23,7 +23,7 @@ function Page() {
         </div>
       </div>
       <div className="container  bg-[#f1f0ed] mx-auto my-3 rounded-lg ">
-        <div className=" bg-center  h-screen rounded-xl flex flex-col justify-start gap-4 items-center py-8">
+        <div className=" bg-center  h-full rounded-xl flex flex-col justify-start gap-4 items-center py-8">
           <h1 className=" text-black font-bold text-2xl "> A NOTE FROM US </h1>
           <p
             className="flex text-center  lg:mx-[20rem] mx-4 lg:text-2xl  "
@@ -45,15 +45,16 @@ function Page() {
       <div className="container  bg-[#f1f0ed] mx-auto my-3 rounded-lg ">
         <div className=" bg-center  h-screen rounded-xl flex flex-col justify-start gap-4 items-center py-8">
           <h1 className=" text-black font-bold text-2xl mb-4  my-4 ">
-        
             MEET THE OWNERS
           </h1>
           <p className="flex text-center  lg:mx-[13rem] mx-4   ">
-            Our Skincare Advisory Board is comprised of renowned experts in
-            chemistry and dermatology. Informed by the latest research, they
-            guide our product innovation from initial formula to final glaze.
+            Our Zalmar Design Advisory Board consists of celebrated experts in
+            fashion and textile innovation. Guided by cutting-edge trends and
+            craftsmanship, they shape our collections from the first sketch to
+            the final stitch, ensuring every piece embodies style, comfort, and
+            quality.
           </p>
-          <div className="flex gap-12 justify-between items-end">
+          <div className=" flex lg:flex-row flex-col gap-12 justify-between items-end">
             <div className="flex flex-col items-center ">
               <Image
                 src={"/Anzal.jpeg"}
@@ -62,7 +63,7 @@ function Page() {
                 height={400}
               />
               <h1 className=" text-lg uppercase "> Anzal Shaikh </h1>
-  <p ></p>
+              <p></p>
             </div>
             <div className="flex flex-col items-center ">
               <Image

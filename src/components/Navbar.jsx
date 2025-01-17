@@ -1,12 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { MdOutlineAddShoppingCart, MdShoppingCart } from "react-icons/md";
 
 const Navbar = () => {
   const [show, setShow] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const [isScrolled, setIsScrolled] = useState(false);
   const handleOutsideClick = (e) => {
     if (e.target.id === "modal-overlay") {
       setIsOpen(false);
@@ -15,12 +16,22 @@ const Navbar = () => {
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
+      // Change navbar visibility on scroll direction
+      if (window.scrollY < lastScrollY) {
         setShow(false);
       } else {
         setShow(true);
       }
+
+      // Check if user has scrolled from the top
+      if (window?.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
       lastScrollY = window.scrollY;
     };
 
@@ -36,43 +47,50 @@ const Navbar = () => {
     <>
       <nav
         className={`${
-          show
-            ? "translate-y-9 bg-[#000000e8]"
-            : " -translate-y-60 bg-[#67645E] "
-        }  fixed w-full top-5 z-10 transition-all rounded duration-300 container mx-auto text-white font-bold`}
+          show ? "-translate-y-60 bg-black" : "translate-y-9 bg-black"
+        } fixed w-full top-5 z-10 transition-all duration-300 container mx-auto font-bold ${
+          isScrolled
+            ? "bg-black text-white"
+            : "bg-black bg-opacity-30 backdrop-blur-md  text-white"
+        }`}
       >
         <div className="flex md:hidden justify-between items-center p-4">
           <a href="#futures" className="text-5xl lg:px-56">
-            zalmar
+            zal<span className=" font-light ">mar</span>
           </a>
-          <button
-            className="md:hidden block text-white focus:outline-none"
-            onClick={toggleMenu}
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <div className="flex items-center gap-4 ">
+            <button
+              className="md:hidden block text-white focus:outline-none"
+              onClick={toggleMenu}
             >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16m-7 6h7"
-                />
-              )}
-            </svg>
-          </button>
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {isMenuOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 6h16M4 12h16m-7 6h7"
+                  />
+                )}
+              </svg>
+            </button>
+            <button className="flex  ">
+              <MdShoppingCart size={20} cursor={"pointer"} />
+            </button>
+          </div>
         </div>
         <ul
           className={`${

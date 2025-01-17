@@ -88,7 +88,7 @@ const ForGotPAssword = () => {
             {/* Additional Links */}
             <div className="mt-4 text-center space-y-2">
               <Link
-                href="/login"
+                href="/account/login"
                 className="text-[#67645E] font-medium transition underline"
               >
                 Back to Login

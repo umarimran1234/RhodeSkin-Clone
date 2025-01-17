@@ -5,7 +5,7 @@ import Link from "next/link";
 import { auth, db } from "@/Config/firebaseConfig"; // Ensure firebaseConfig exports `db`
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
-
+import { useRouter } from "next/navigation";
 const RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -13,14 +13,8 @@ const RegisterPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  console.log({
-    firstName,
-    lastName,
-    email,
-    uid: 12323,
-    createdAt: new Date(),
-  });
 
+  const navigate = useRouter();
   const handleRegister = async () => {
     if (!firstName || !lastName || !email || !password) {
       setError("All fields are required!");
@@ -47,7 +41,8 @@ const RegisterPage = () => {
       setLastName("");
       setEmail("");
       setPassword("");
-      setSuccess("Account created successfully!");
+      setSuccess("Thank you For join US");
+      navigate.push("/account/login");
       setError("");
     } catch (err) {
       console.error(err);

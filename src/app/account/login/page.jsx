@@ -18,8 +18,10 @@ const LoginPage = () => {
 
     try {
       // Firebase authentication function
-      await signInWithEmailAndPassword(auth, email, password);
+      const user = await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful! 🎉");
+      console.log(user);
+
       // Navigate to dashboard or desired page
     } catch (err) {
       // Show error message
@@ -92,14 +94,14 @@ const LoginPage = () => {
 
             {/* Additional Links */}
             <div className="mt-4 text-center space-y-2">
-              <a
-                href="#"
+              <Link
+                href="/account/forgotPassword"
                 className="text-[#67645E] font-medium transition underline"
               >
                 Forgot your password?
-              </a>
+              </Link>
               <p className="text-[#67645E] font-medium">
-                Don’t have an account?{" "}
+                Don’t have an account?
                 <Link
                   href="/account/register"
                   className="font-semibold text-[#67645E] underline"

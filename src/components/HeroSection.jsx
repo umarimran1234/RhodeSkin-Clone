@@ -3,7 +3,7 @@ const HeroSection = () => {
     <div className="container mx-auto">
       <div className="relative h-screen">
         <video
-          className="absolute rounded-xl top-0 left-0 w-full h-full object-cover"
+          className="absolute rounded-xl  top-0 left-0 w-full h-full object-cover"
           src="/HeroSectionVideo.mp4"
           autoPlay
           loop
