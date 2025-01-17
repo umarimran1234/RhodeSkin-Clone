@@ -179,9 +179,11 @@ const Navbar = () => {
                 <p className="text-xs text-gray-400">
                   *shipping, taxes, and discounts calculated at checkout.
                 </p>
-                <button className="w-full bg-[#67645E] text-white py-3 rounded text-sm font-medium hover:bg-gray-800">
-                  CHECKOUT
-                </button>
+                <Link href={"/checkout"}>
+                  <button className="w-full bg-[#67645E] text-white py-3 rounded text-sm font-medium hover:bg-gray-800">
+                    CHECKOUT
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
