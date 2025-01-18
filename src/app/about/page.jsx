@@ -1,5 +1,8 @@
 import Image from "next/image";
 import React from "react";
+import { MdFacebook } from "react-icons/md";
+import { FaLinkedin } from "react-icons/fa6";
+import Link from "next/link";
 
 function Page() {
   return (
@@ -43,7 +46,7 @@ function Page() {
         </div>
       </div>
       <div className="container  bg-[#f1f0ed] mx-auto my-3 rounded-lg ">
-        <div className=" bg-center  h-screen rounded-xl flex flex-col justify-start gap-4 items-center py-8">
+        <div className=" bg-center rounded-xl flex flex-col justify-start gap-4 items-center py-8">
           <h1 className=" text-black font-bold text-2xl mb-4  my-4 ">
             MEET THE OWNERS
           </h1>
@@ -62,10 +65,19 @@ function Page() {
                 width={400}
                 height={400}
               />
-              <h1 className=" text-lg uppercase "> Anzal Shaikh </h1>
-              <p></p>
+              <h1 className="text-lg uppercase"> Anzal Shaikh </h1>
+              <div className="flex items-center justify-between gap-4 ">
+                <Link href={"https://www.facebook.com/umar.imran.750331"}>
+                  <MdFacebook size={24} />
+                </Link>
+                <Link
+                  href={"https://www.linkedin.com/in/anzal-sheikh-69a1b3328/"}
+                >
+                  <FaLinkedin size={24} />
+                </Link>
+              </div>
             </div>
-            <div className="flex flex-col items-center ">
+            <div className="flex  flex-col items-center ">
               <Image
                 src={"/umar.png"}
                 className="rounded"
@@ -73,6 +85,16 @@ function Page() {
                 height={400}
               />
               <h1 className=" text-lg uppercase "> Muhammad Umar Imran </h1>
+              <div className="flex items-center justify-between gap-4 ">
+                <Link href={"https://www.facebook.com/umar.imran.750331"}>
+                  <MdFacebook size={24} />
+                </Link>
+                <Link
+                  href={"https://www.linkedin.com/in/umar-imran-4b3889278/"}
+                >
+                  <FaLinkedin size={24} />
+                </Link>
+              </div>
             </div>
           </div>
         </div>

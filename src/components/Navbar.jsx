@@ -47,18 +47,18 @@ const Navbar = () => {
     <>
       <nav
         className={`${
-          show ? "-translate-y-60 bg-black" : "translate-y-9 bg-black"
+          show ? "translate-y-9 bg-black" : "translate-y-9 bg-black"
         } fixed w-full top-5 z-10 transition-all duration-300 container mx-auto font-bold ${
           isScrolled
             ? "bg-black text-white"
-            : "bg-black bg-opacity-30 backdrop-blur-md  text-white"
+            : "bg-black bg-opacity-40   text-white "
         }`}
       >
         <div className="flex md:hidden justify-between items-center p-4">
           <a href="#futures" className="text-5xl lg:px-56">
             zal<span className=" font-light ">mar</span>
           </a>
-          <div className="flex items-center gap-4 ">
+          <div className="flex items-center gap-4">
             <button
               className="md:hidden block text-white focus:outline-none"
               onClick={toggleMenu}
@@ -97,8 +97,8 @@ const Navbar = () => {
             isMenuOpen ? "block bg-gray-50 text-gray-400" : "hidden"
           } md:flex md:flex-row flex-col space-y-2 md:items-center md:justify-center p-4 lg:space-x-10 md:space-x-7`}
         >
-          <li>
-            <a href="#shop">SHOP</a>
+          <li className="mt-2">
+            <Link href="#shop">SHOP</Link>
           </li>
           <li>
             <Link href="/about">ABOUT</Link>

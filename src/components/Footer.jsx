@@ -209,7 +209,7 @@ const Footer = () => {
               href={"https://code-sphare-com.vercel.app/"}
               className="font-semibold"
             >
-              codesphere Innvation{" "}
+              codesphere Innvation
             </Link>
           </p>
         </div>

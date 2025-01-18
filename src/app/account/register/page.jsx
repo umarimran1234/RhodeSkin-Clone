@@ -57,7 +57,7 @@ const RegisterPage = () => {
         {/* Left Section with Image */}
         <div className="relative lg:w-1/2 w-full h-80 lg:h-auto">
           <Image
-            src="/LoginImg.webp"
+            src="/registerPgaeImage.jpg"
             alt="Skin Care"
             layout="fill"
             objectFit="cover"
@@ -69,10 +69,10 @@ const RegisterPage = () => {
         </div>
 
         {/* Right Section with Form */}
-        <div className="flex justify-center items-center lg:w-1/2 w-full p-6 lg:p-12 bg-gray-100">
+        <div className="flex justify-center items-center lg:w-1/2 w-full p-6 lg:p-12 bg-white">
           <div className="w-full max-w-md">
             {/* Form Title */}
-            <h1 className="text-2xl lg:text-5xl font-bold text-[#67645E] mb-6 text-center">
+            <h1 className="text-2xl lg:text-5xl font-bold text-black mb-6 text-center">
               Create Account
             </h1>
 
@@ -84,7 +84,7 @@ const RegisterPage = () => {
                   placeholder="First Name"
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
-                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
+                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
               <div>
@@ -93,7 +93,7 @@ const RegisterPage = () => {
                   placeholder="Last Name"
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
-                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
+                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
               <div>
@@ -102,7 +102,7 @@ const RegisterPage = () => {
                   placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
+                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
               <div>
@@ -111,7 +111,7 @@ const RegisterPage = () => {
                   placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-gray-400 focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
+                  className="w-full p-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-black focus:outline-none placeholder:text-[#67645E] placeholder:font-medium"
                 />
               </div>
               {error && <p className="text-red-500 text-center">{error}</p>}

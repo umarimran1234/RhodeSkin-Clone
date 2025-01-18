@@ -37,15 +37,12 @@ const LoginPage = () => {
         {/* Left Section with Image */}
         <div className="relative lg:w-1/2 w-full h-80 lg:h-auto">
           <Image
-            src="/LoginImg.webp"
+            src="/zalmarLoginPAgeImage.jpg"
             alt="Skin Care"
             layout="fill"
             objectFit="cover"
             className="rounded-lg lg:rounded-none"
           />
-          <div className="absolute top-[55%] left-8 text-white font-semibold text-xl lg:text-[34px]">
-            It’s time to invest in your SKIN.
-          </div>
         </div>
 
         {/* Right Section with Form */}
