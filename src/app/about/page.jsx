@@ -57,7 +57,7 @@ function Page() {
             the final stitch, ensuring every piece embodies style, comfort, and
             quality.
           </p>
-          <div className=" flex lg:flex-row flex-col gap-12 justify-between items-end">
+          <div className=" mx-11 flex lg:flex-row flex-col gap-12 justify-between items-end">
             <div className="flex flex-col items-center ">
               <Image
                 src={"/Anzal.jpeg"}
@@ -85,6 +85,25 @@ function Page() {
                 height={400}
               />
               <h1 className=" text-lg uppercase "> Muhammad Umar Imran </h1>
+              <div className="flex items-center justify-between gap-4 ">
+                <Link href={"https://www.facebook.com/umar.imran.750331"}>
+                  <MdFacebook size={24} />
+                </Link>
+                <Link
+                  href={"https://www.linkedin.com/in/umar-imran-4b3889278/"}
+                >
+                  <FaLinkedin size={24} />
+                </Link>
+              </div>
+            </div>
+            <div className="flex  flex-col items-center ">
+              <Image
+                src={"/bilalMustafa.jpg"}
+                className="rounded"
+                width={400}
+                height={400}
+              />
+              <h1 className=" text-lg uppercase "> Bilal Mustafa </h1>
               <div className="flex items-center justify-between gap-4 ">
                 <Link href={"https://www.facebook.com/umar.imran.750331"}>
                   <MdFacebook size={24} />

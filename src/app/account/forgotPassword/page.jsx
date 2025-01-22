@@ -35,15 +35,12 @@ const ForGotPAssword = () => {
         {/* Left Section with Image */}
         <div className="relative lg:w-1/2 w-full h-80 lg:h-auto">
           <Image
-            src="/LoginImg.webp"
+            src="/forgotPasswordImage.jpg"
             alt="Skin Care"
             layout="fill"
             objectFit="cover"
             className="rounded-lg lg:rounded-none"
           />
-          <div className="absolute top-[55%] left-8 text-white font-semibold text-xl lg:text-[34px]">
-            It’s time to invest in your SKIN.
-          </div>
         </div>
 
         {/* Right Section with Form */}
@@ -94,12 +91,12 @@ const ForGotPAssword = () => {
                 Back to Login
               </Link>
               <p className="text-[#67645E] font-medium">
-                Don’t have an account?{" "}
+                Don’t have an account? {"  "}
                 <Link
                   href="/account/register"
                   className="font-semibold text-[#67645E] underline"
                 >
-                  Sign up!
+                  {"  "} Sign up!
                 </Link>
               </p>
             </div>

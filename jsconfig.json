@@ -8,6 +8,6 @@
     "allowJs": true, // JavaScript aur JSX files ko allow kare
     "checkJs": false // JavaScript files ko type check na kare
   },
-  "include": ["src"], // Sirf src folder include kare
+  "include": ["src", "src/app/product_view/[id]/.jsx"], // Sirf src folder include kare
   "exclude": ["node_modules"] // node_modules ko exclude kare
 }

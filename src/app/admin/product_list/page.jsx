@@ -22,9 +22,11 @@ const AdminPanel = () => {
     name: "",
     image: null,
     price: "",
+    oldprice: "",
     isActive: true,
     isSaleOut: false,
-    imageCredendials: null,
+    category: "",
+    colorImages: [],
   });
   // const updateImage = () => {
   //   uploadImageToImageBB(selectedProduct?.image);
@@ -37,7 +39,6 @@ const AdminPanel = () => {
         name: selectedProduct?.name,
         price: parseFloat(selectedProduct?.price),
         isActive: selectedProduct?.isActive,
-
         isSaleOut: selectedProduct?.isSaleOut,
       });
 
@@ -100,12 +101,20 @@ const AdminPanel = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked, files } = e.target;
+
     if (name === "image") {
+      // If the field is for front image
       const selectedImg = files[0];
       if (selectedImg) {
-        uploadImageToImageBB(selectedImg);
+        // Upload the front image
+        uploadImageToImageBB(selectedImg, "front");
       }
+    } else if (name === "colorImages") {
+      // If the field is for color images (multiple images)
+      const selectedImages = Array.from(files);
+      selectedImages.forEach((img) => uploadImageToImageBB(img, "color"));
     } else {
+      // Handle all other fields (e.g., name, price, etc.)
       setNewProduct({
         ...newProduct,
         [name]: type === "checkbox" ? checked : value,
@@ -113,7 +122,7 @@ const AdminPanel = () => {
     }
   };
 
-  const uploadImageToImageBB = async (selectedImg) => {
+  const uploadImageToImageBB = async (selectedImg, type = "front") => {
     const formData = new FormData();
     formData.append("image", selectedImg);
     // console.log(formData);
@@ -134,11 +143,22 @@ const AdminPanel = () => {
       if (response.ok) {
         const data = await response.json();
         // setUploadResponse(data);
-        setNewProduct({
-          ...newProduct,
-          image: data?.data?.display_url,
-          imageCredendials: data,
-        });
+        if (type === "front") {
+          setNewProduct({
+            ...newProduct,
+            image: data?.data?.display_url,
+          });
+        } else if (type === "color") {
+          // Add color-specific image to the colorImages array
+          setNewProduct({
+            ...newProduct,
+            colorImages: [...newProduct.colorImages, data?.data?.display_url], // Add to the array
+          });
+        }
+      } else {
+        console.error("Error: Image upload not successful", response);
+        return null;
+
         // setImgURL(data?.data?.display_url);
       }
       // const response = await axios.post(
@@ -187,16 +207,19 @@ const AdminPanel = () => {
       await addDoc(collection(db, "products"), {
         name: newProduct?.name,
         image: newProduct?.image,
-
         price: parseFloat(newProduct.price),
         isActive: newProduct?.isActive,
         isSaleOut: newProduct?.isSaleOut,
+        category: newProduct?.category,
+        oldPrice: newProduct?.oldprice,
+        colorImages: newProduct?.colorImages,
       });
 
       setNewProduct({
         name: "",
-        image: null,
+        // image: null,
         price: "",
+        oldprice: "",
         isActive: true,
         isSaleOut: false,
       });
@@ -234,7 +257,31 @@ const AdminPanel = () => {
                 />
               </div>
               <div>
-                <label className="block font-medium mb-2">Image</label>
+                <label className="block font-medium mb-2">
+                  Select category
+                </label>
+                <select
+                  name="name"
+                  value={newProduct?.category}
+                  onChange={(e) => {
+                    setNewProduct({ ...newProduct, category: e.target.value });
+                  }}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="" disabled>
+                    Select a category
+                  </option>
+                  <option value="HOODIE">Hoodie</option>
+                  <option value="T-SHIRT">T-shirt</option>
+                  <option value="FULL-SLIP">Full Slip</option>
+                  <option value="HALF-SLIP">Half Slip</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+
+              <div>
+                <label className="block font-medium mb-2"> Front Image </label>
                 {newProduct?.image !== null ? (
                   <>
                     <div className="flex  justify-start items-start">
@@ -266,11 +313,59 @@ const AdminPanel = () => {
                 )}
               </div>
               <div>
+                <label className="block font-medium mb-2">Another Images</label>
+
+                <>
+                  <div className="flex  justify-start items-start">
+                    {newProduct?.colorImages?.map((img, index) => (
+                      <div key={index}>
+                        <Image
+                          width={40}
+                          height={40}
+                          className="mb-2  rounded-full  "
+                          alt="product image"
+                          src={img || null}
+                        />
+                      </div>
+                    ))}
+
+                    <MdDelete
+                      onClick={deleteImage}
+                      color="red"
+                      size={30}
+                      cursor={"pointer"}
+                      className=" hover:text-red-400 "
+                    />
+                  </div>
+                </>
+
+                <input
+                  type="file"
+                  name="colorImages"
+                  multiple
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                />
+              </div>
+              <div>
                 <label className="block font-medium mb-2">Price</label>
                 <input
                   type="number"
                   name="price"
                   value={newProduct.price}
+                  onChange={handleInputChange}
+                  required
+                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
+                  placeholder="Enter price"
+                />
+              </div>
+              <div>
+                <label className="block font-medium mb-2">Old prices</label>
+                <input
+                  type="number"
+                  name="oldprice"
+                  value={newProduct.old}
                   onChange={handleInputChange}
                   required
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500"
@@ -309,15 +404,18 @@ const AdminPanel = () => {
           </div>
 
           {/* Product Table */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="bg-white p-6 rounded-lg shadow-md overflow-scroll ">
             <h2 className="text-2xl font-semibold mb-4">Products List</h2>
             {loading === true ? (
               <ZMLoader />
             ) : (
               <>
-                <table className="w-full border-collapse border border-gray-300">
+                <table className="w-full border-collapse border overflow-hidden border-gray-300">
                   <thead>
                     <tr className="bg-gray-200">
+                      <th className="border border-gray-300 px-4 py-2">
+                        Color images
+                      </th>
                       <th className="border border-gray-300 px-4 py-2">
                         Image
                       </th>
@@ -339,6 +437,15 @@ const AdminPanel = () => {
                   <tbody>
                     {products.map((product) => (
                       <tr key={product?.id} className="text-center">
+                        <td className="border md:flex-row flex-col flex md:overflow-auto overflow-scroll   border-gray-300 px-4 py-2">
+                          {product.colorImages.map((img, index) => (
+                            <img
+                              src={img}
+                              alt={product?.name}
+                              className="w-16 h-16 object-cover mx-auto"
+                            />
+                          ))}
+                        </td>
                         <td className="border border-gray-300 px-4 py-2">
                           <img
                             src={product?.image}
@@ -350,7 +457,7 @@ const AdminPanel = () => {
                           {product?.name}
                         </td>
                         <td className="border border-gray-300 px-4 py-2">
-                          ${product?.price}
+                          {product?.price}
                         </td>
                         <td className="border border-gray-300 px-4 py-2">
                           {product?.isActive ? "Yes" : "No"}
@@ -450,6 +557,23 @@ const AdminPanel = () => {
                   setSelectedProduct({
                     ...selectedProduct,
                     price: e.target.value,
+                  });
+                }}
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                placeholder="Enter price"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700">
+                old price
+              </label>
+              <input
+                type="number"
+                value={selectedProduct?.oldprice}
+                onChange={(e) => {
+                  setSelectedProduct({
+                    ...selectedProduct,
+                    oldprice: e.target.value,
                   });
                 }}
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"

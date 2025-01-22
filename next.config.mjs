@@ -7,7 +7,7 @@ const nextConfig = withVideos({
     return config;
   },
   images: {
-    domains: ["i.ibb.co"],
+    domains: ["i.ibb.co", "images.unsplash.com", "assets.aceternity.com"],
   },
 });
 

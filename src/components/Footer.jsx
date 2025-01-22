@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { FaFacebook } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -23,10 +24,10 @@ const Footer = () => {
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-6 md:grid-cols-3 gap-4 border-t-2 pt-8 border-black font-medium">
           {/* Email Subscription Section */}
           <div className="md:col-span-2 md:border-r-2 border-black">
-            <p className="">Join us on the rhode to an effortless glow.</p>
+            <p className="">Join us on the journey to effortless style.</p>
             <p className="mt-2 w-11/12">
-              Glaze your inbox with tips, tricks & exclusive content from
-              Hailey.
+              Elevate your inbox with fashion tips, styling tricks, and
+              exclusive content from Zalmar.
             </p>
             <div className="mt-4 md:w-11/12 flex md:flex-row flex-col md:items-center">
               <input
@@ -53,25 +54,25 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  Our Story
+                <a href="/account/login" className="hover:underline">
+                  Account
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  Rhode Futures
-                </a>
+                <Link href="#" className="hover:underline">
+                  Other Modules
+                </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="hover:underline">
                   Impact
                 </a>
-              </li>
-              <li>
+              </li> */}
+              {/* <li>
                 <a href="#" className="hover:underline">
                   VLOG
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -80,7 +81,10 @@ const Footer = () => {
             <h2 className="font-bold mb-4">SOCIAL</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:underline flex gap-2">
+                <Link
+                  href="https://www.instagram.com/zalmar_store"
+                  className="hover:underline flex gap-2"
+                >
                   <Image
                     src={"/InstagramIcon.svg"}
                     width={1000}
@@ -89,21 +93,25 @@ const Footer = () => {
                     className="w-4"
                   ></Image>
                   Instagram
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:underline flex gap-2">
-                  <Image
+                <Link
+                  href="https://www.facebook.com/share/1EzPKRy7SN/"
+                  className="hover:underline items-center  flex gap-2"
+                >
+                  {/* <Image
                     src={"/YoutubeIcon.svg"}
                     width={1000}
                     height={1000}
                     alt="Youtube Icon "
                     className="w-4"
-                  ></Image>{" "}
-                  YouTube
-                </a>
+                  ></Image> */}
+                  <FaFacebook />
+                  Facebook
+                </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="#" className="hover:underline flex gap-2">
                   <Image
                     src={"/TiktokIcon.svg"}
@@ -114,7 +122,7 @@ const Footer = () => {
                   ></Image>
                   TikTok
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -161,7 +169,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <a href="#" className="hover:underline">
-                  We’re here M-F 9am - 5pm PST.
+                  We’re here 24 hours
                 </a>
               </li>
               <li>
@@ -170,13 +178,20 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  StoreZalmar@gmail.com
+                <a
+                  href="mailto:Storezalmar@gmail.com?subject=Hello%20Zalmar&body=I%20would%20like%20to%20know%20more%20about%20your%20products."
+                  className="hover:underline"
+                >
+                  Storezalmar@gmail.com
                 </a>
               </li>
+
               <li>
-                <a href="#" className="hover:underline">
-                  Do Not Sell or Share My Personal Information
+                <a
+                  href="https://wa.me/+923292299694"
+                  className="hover:underline"
+                >
+                  +92 329 2299694
                 </a>
               </li>
               <li>
@@ -185,13 +200,16 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
-                  © zalmar {new Date().getFullYear()}
-                </a>
+                <Link
+                  href="http://code-sphare-com.vercel.app/"
+                  className="hover:underline"
+                >
+                  © codesphare Innovation {new Date().getFullYear()}
+                </Link>
               </li>
               <li>
                 <Image
-                  src={"/AfterPay.avif"}
+                  src={"/zalmarlogo.PNG"}
                   width={1000}
                   height={1000}
                   alt="After Pay Image"
@@ -203,13 +221,13 @@ const Footer = () => {
 
         {/* Footer Bottom Section */}
         <div className="mt-8 border-t border-gray-300 pt-4 text-center md:text-left text-sm">
-          <p className="text-center">
-            created by {""}
+          <p className="text-center hover:underline ">
+            © {""}
             <Link
               href={"https://code-sphare-com.vercel.app/"}
               className="font-semibold"
             >
-              codesphere Innvation
+              codesphare Innovation {new Date().getFullYear()}
             </Link>
           </p>
         </div>

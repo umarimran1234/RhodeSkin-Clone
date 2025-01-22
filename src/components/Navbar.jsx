@@ -48,7 +48,7 @@ const Navbar = () => {
       <nav
         className={`${
           show ? "translate-y-9 bg-black" : "translate-y-9 bg-black"
-        } fixed w-full top-5 z-10 transition-all duration-300 container mx-auto font-bold ${
+        } fixed w-full  z-50 top-5  transition-all duration-300 container mx-auto font-bold ${
           isScrolled
             ? "bg-black text-white"
             : "bg-black bg-opacity-40   text-white "
@@ -98,13 +98,13 @@ const Navbar = () => {
           } md:flex md:flex-row flex-col space-y-2 md:items-center md:justify-center p-4 lg:space-x-10 md:space-x-7`}
         >
           <li className="mt-2">
-            <Link href="#shop">SHOP</Link>
+            <Link href="/shop">SHOP</Link>
           </li>
           <li>
             <Link href="/about">ABOUT</Link>
           </li>
-          <li>
-            <a href="#futures">FUTURES</a>
+          <li className=" w-full ">
+            <Link href="/OtherModules"> ARTICLES </Link>
           </li>
           <li className="hidden md:block lg:px-56">
             <Link href="/" className="text-5xl">
@@ -113,15 +113,15 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <a href="#search">SEARCH</a>
+            <Link href="#search"> MODULES </Link>
           </li>
           <li>
             <Link href="/account/login">ACCOUNT</Link>
           </li>
-          <li>
-            <a href="#cart" onClick={() => setIsOpen(true)}>
+          <li className=" w-full ">
+            <Link href="#cart" onClick={() => setIsOpen(true)}>
               CART (0)
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>
@@ -129,7 +129,7 @@ const Navbar = () => {
         <div
           id="modal-overlay"
           onClick={handleOutsideClick}
-          className="fixed inset-0 z-40"
+          className="fixed  inset-0 z-50 "
         >
           <div className="fixed right-0 top-0 h-full w-full max-w-md bg-gray-50 transform transition-transform translate-x-0 p-6 shadow-lg z-50 sm:w-96 overflow-y-auto">
             {/* Close Button */}
