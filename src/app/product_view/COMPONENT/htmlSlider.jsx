@@ -8,15 +8,17 @@ import { addToCart } from "@/lib/cartUtils";
 function HtmlSlider({ products, id }) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const product = products?.find((product) => product.id === id);
-  const uuid = localStorage.getItem("uuid");
+  const uuid = localStorage?.getItem("uuid");
   console.log(uuid);
 
   const [increement, setIncreement] = React.useState(1);
   const [colorss, setColor] = useState();
   const colors =
     product?.category === "HOODIE"
-      ? ["black", "lightblue", "marchant", "#FFFDD0"]
-      : [];
+      ? ["black", "lightblue", "yellow", "#FFFDD0"]
+      : product?.category ===
+        "T-SHIRT"[("black", "lightblue", "yellow", "#FFFDD0")];
+
   const handleAddToCart = async () => {
     try {
       await addToCart(

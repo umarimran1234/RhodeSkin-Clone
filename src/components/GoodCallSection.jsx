@@ -22,9 +22,9 @@ const GoodCallSection = ({ image }) => {
           height={1000}
           className="md:w-1/2 w-full rounded-r-xl"
         ></Image>
-        {/* Second Child Div */}
         <div className="md:w-1/2 w-full p-8 bg-[#efefef] rounded-l-xl flex flex-col justify-end">
           <h3 className="text-[34px] text-[#67645E] md:w-2/3 font-bold">
+            {/* Second Child Div */}
             Zalmar latest Arrivals
           </h3>
           <p className="text-[#67645E] md:w-2/3 font-medium my-4">
