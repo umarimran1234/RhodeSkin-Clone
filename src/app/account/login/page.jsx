@@ -21,7 +21,7 @@ const LoginPage = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful! 🎉");
       console.log(user);
-
+      localStorage.setItem("uuid", user.user.uid);
       // Navigate to dashboard or desired page
     } catch (err) {
       // Show error message

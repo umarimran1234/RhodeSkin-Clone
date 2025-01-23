@@ -1,23 +1,43 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
+import { addToCart } from "@/lib/cartUtils";
 
 function HtmlSlider({ products, id }) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const product = products?.find((product) => product.id === id);
-  console.log(product, "product");
+  const uuid = localStorage.getItem("uuid");
+  console.log(uuid);
+
   const [increement, setIncreement] = React.useState(1);
-
+  const [colorss, setColor] = useState();
   const colors =
-    product?.category === "HOODIE" ? ["#FF5733", "#33FF57", "#3357FF"] : [];
-
+    product?.category === "HOODIE"
+      ? ["black", "lightblue", "marchant", "#FFFDD0"]
+      : [];
+  const handleAddToCart = async () => {
+    try {
+      await addToCart(
+        uuid,
+        product?.id,
+        product?.name,
+        product?.price,
+        increement,
+        product?.image,
+        colorss
+      );
+      alert("Product added to cart!");
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2">
-          <div className="slider-box w-full h-full max-lg:mx-auto mx-0">
+          <div className="slider-box w-full  h-full max-lg:mx-auto mx-0">
             {/* Main Slider */}
             <Swiper
               modules={[Navigation, Thumbs]}
@@ -35,13 +55,16 @@ function HtmlSlider({ products, id }) {
               </SwiperSlide> */}
               {product?.colorImages?.length > 0 &&
                 product?.colorImages.map((item, index) => (
-                  <SwiperSlide>
+                  <SwiperSlide
+                    style={{ display: "flex", justifyContent: "center" }}
+                    className="flex justify-center"
+                  >
                     <img
                       // height={200}
                       // width={300}
                       src={item}
                       alt="Summer Travel Bag image"
-                      className="max-lg:mx-auto rounded-2xl object-cover"
+                      className=" w-[25rem] flex justify-center "
                     />
                   </SwiperSlide>
                 ))}
@@ -84,7 +107,7 @@ function HtmlSlider({ products, id }) {
                   <img
                     src={item}
                     alt="Thumbnail"
-                    className="cursor-pointer rounded-xl transition-all duration-500 object-cover"
+                    className="cursor-pointer rounded-xl transition-all duration-500 w-40"
                   />
                 </SwiperSlide>
               ))}
@@ -131,7 +154,7 @@ function HtmlSlider({ products, id }) {
                     {product?.category}
                   </p>
                 </div>
-                <button className=" bg- group transition-all duration-500 p-0.5">
+                {/* <button className=" bg- group transition-all duration-500 p-0.5">
                   <svg
                     width="60"
                     height="60"
@@ -156,16 +179,16 @@ function HtmlSlider({ products, id }) {
                       stroke-linejoin="round"
                     />
                   </svg>
-                </button>
+                </button> */}
               </div>
 
               <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
                 <div className="flex items-center">
                   <h5 className="font-manrope font-semibold text-2xl leading-9 text-gray-900 ">
-                    {product?.price}
+                    RS {product?.price}
                   </h5>
                   <del className="ml-3 font-semibold text-lg text-indigo-600">
-                    30
+                    RS {product?.oldPrice}
                   </del>
                 </div>
                 <svg
@@ -207,10 +230,24 @@ function HtmlSlider({ products, id }) {
                       </clipPath>
                     </defs>
                   </svg>
-                  <span className="text-base font-medium text-white">4.8</span>
+                  <span className="text-base font-medium text-white">
+                    {" "}
+                    15% off
+                  </span>
                 </button>
               </div>
               <p className="font-medium text-lg text-gray-900 mb-2">Color</p>
+              <div className="mt-3 flex space-x-2">
+                {colors?.map((color, index) => (
+                  <span
+                    key={index}
+                    onClick={() => setColor(color)}
+                    className="h-4 w-4 cursor-pointer active:ring-2  rounded-full border border-gray-300"
+                    style={{ backgroundColor: color }}
+                    title={color}
+                  ></span>
+                ))}
+              </div>
               <div className="grid grid-cols-3 gap-3 mb-6 max-w-sm">
                 {/* <div className="color-box group">
                   <div>
@@ -316,7 +353,7 @@ function HtmlSlider({ products, id }) {
                     onChange={(e) => {
                       setIncreement(e.target.value);
                     }}
-                    defaultValue={increement}
+                    value={increement}
                   />
                   <button
                     onClick={() => {
@@ -355,9 +392,12 @@ function HtmlSlider({ products, id }) {
                     </svg>
                   </button>
                 </div>
-                <button className="group py-3 px-5 rounded-full bg-indigo-50 text-indigo-600 font-semibold text-lg w-full flex items-center justify-center gap-2 shadow-sm shadow-transparent transition-all duration-500 hover:shadow-indigo-300 hover:bg-indigo-100">
+                <button
+                  onClick={handleAddToCart}
+                  className="group py-3 px-5 rounded-full bg-black text-white font-semibold text-lg w-full flex items-center justify-center gap-2 shadow-sm shadow-transparent transition-all duration-500 hover:shadow-indigo-300 hover:bg-gray-600"
+                >
                   <svg
-                    className="stroke-indigo-600 transition-all duration-500 group-hover:stroke-indigo-600"
+                    className="stroke-white transition-all duration-500 group-hover:stroke-black"
                     width="22"
                     height="22"
                     viewBox="0 0 22 22"
@@ -374,7 +414,7 @@ function HtmlSlider({ products, id }) {
                   Add to cart
                 </button>
               </div>
-              <button className="text-center w-full px-5 py-4 rounded-[100px] bg-indigo-600 flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-indigo-700 hover:shadow-indigo-300">
+              <button className="text-center w-full px-5 py-4 rounded-[100px] bg-black flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-700 text-xl hover:shadow-indigo-300">
                 Buy Now
               </button>
             </div>

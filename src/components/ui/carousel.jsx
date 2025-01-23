@@ -50,7 +50,7 @@ const Slide = ({ slide, index, current, handleSlideClick }) => {
     event.currentTarget.style.opacity = "1";
   };
 
-  const { price, image, button, name, id } = slide;
+  const { price, image, colorImages, button, name, id } = slide;
 
   return (
     <div className="[perspective:1200px] [transform-style:preserve-3d]">
