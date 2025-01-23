@@ -2,18 +2,40 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MdOutlineAddShoppingCart, MdShoppingCart } from "react-icons/md";
-
+import { auth } from "@/Config/firebaseConfig";
+import { useRouter } from "next/navigation";
 const Navbar = () => {
   const [show, setShow] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState();
+  const Router = useRouter();
   const handleOutsideClick = (e) => {
     if (e.target.id === "modal-overlay") {
       setIsOpen(false);
     }
   };
+  useEffect(() => {
+    // Check for UUID in localStorage
+    const userUUID = localStorage.getItem("uuid");
+    if (userUUID) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
 
+  const handleLogout = async () => {
+    try {
+      await auth.signOut();
+      localStorage.removeItem("uuid");
+      Router.push("/account/login");
+      console.log("User logged out");
+    } catch (error) {
+      console.error("Error logging out:", error);
+    }
+  };
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -115,11 +137,15 @@ const Navbar = () => {
           <li>
             <Link href="#search"> MODULES </Link>
           </li>
-          {
+          {isLoggedIn === true ? (
+            <li>
+              <button onClick={handleLogout}>LOGOUT</button>
+            </li>
+          ) : (
             <li>
               <Link href="/account/login">ACCOUNT</Link>
             </li>
-          }
+          )}
           <li className=" w-full ">
             <Link href="#cart" onClick={() => setIsOpen(true)}>
               CART (0)

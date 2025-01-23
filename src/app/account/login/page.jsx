@@ -5,13 +5,14 @@ import Link from "next/link";
 import { auth } from "@/Config/firebaseConfig"; // Firebase configuration file import
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { FaSpinner } from "react-icons/fa6";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   // const [error, setError] = useState("");
-
+  const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
@@ -22,6 +23,7 @@ const LoginPage = () => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful! 🎉");
       console.log(user);
+      router.push("/");
       localStorage.setItem("uuid", user.user.uid);
       // Navigate to dashboard or desired page
     } catch (err) {
