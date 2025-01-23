@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useUser } from "@/authContaxt/authContxt";
 import Image from "next/image";
 import HeroSection from "@/components/HeroSection";
+import Link from "next/link";
 
 function ProductsShowing() {
   const { products } = useUser();
@@ -156,7 +157,10 @@ function ProductsShowing() {
                     </p>
                   </div>
                   {/* Add to Cart Button */}
-                  <button className="flex items-center justify-center bg-gray-900 px-4 py-2 text-sm text-white transition-transform transform hover:scale-110 hover:bg-gray-700 rounded duration-300">
+                  <Link
+                    href={`/product_view/${product?.id}`}
+                    className="flex items-center justify-center bg-gray-900 px-4 py-2 text-sm text-white transition-transform transform hover:scale-110 hover:bg-gray-700 rounded duration-300"
+                  >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="mr-2 h-5 w-5"
@@ -167,7 +171,7 @@ function ProductsShowing() {
                     </svg>
                     {/* Add to cart */}
                     PRODUCT VIEW
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

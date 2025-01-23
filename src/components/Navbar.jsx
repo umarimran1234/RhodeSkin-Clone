@@ -8,11 +8,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  // const handleOutsideClick = (e) => {
-  //   if (e.target.id === "modal-overlay") {
-  //     setIsOpen(false);
-  //   }
-  // };
+  const handleOutsideClick = (e) => {
+    if (e.target.id === "modal-overlay") {
+      setIsOpen(false);
+    }
+  };
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -146,19 +146,15 @@ const Navbar = () => {
               <div className="text-center mb-52">
                 <p className="text-gray-700">Your cart is currently empty</p>
                 <div className="mt-4 h-1 w-32 bg-gray-300 mx-auto"></div>
-                <p className="mt-2 text-sm text-gray-500">
-                  add <span className="font-semibold">$45.00</span> more for
-                  <span className="font-semibold"> FREE shipping</span>
-                </p>
               </div>
 
               {/* Suggested Product */}
               <div className="p-4 bg-white rounded-lg shadow-md">
                 <p className="text-sm text-gray-500">
-                  Complete your rhode{" "}
-                  <span className="font-semibold">ROUTINE</span>
+                  Complete your{" "}
+                  <span className="font-semibold">PURCHASING</span>
                 </p>
-                <div className="flex items-center justify-between mt-4">
+                {/* <div className="flex items-center justify-between mt-4">
                   <div className="flex items-center space-x-4">
                     <div className="h-12 w-12 bg-gray-200 rounded"></div>
                     <p className="font-medium text-gray-700">
@@ -168,19 +164,19 @@ const Navbar = () => {
                   <button className="bg-[#67645E] text-white text-sm px-4 py-2 rounded">
                     ADD - $24.00
                   </button>
-                </div>
+                </div> */}
               </div>
 
               {/* Subtotal and Checkout */}
               <div className="space-y-2">
                 <p className="text-sm text-gray-500">
-                  subtotal <span className="font-medium">$0.00</span>
+                  TOTAL <span className="font-medium"> 0.00</span>
                 </p>
                 <p className="text-xs text-gray-400">
                   *shipping, taxes, and discounts calculated at checkout.
                 </p>
                 <Link href={"/checkout"}>
-                  <button className="w-full bg-[#67645E] text-white py-3 rounded text-sm font-medium hover:bg-gray-800">
+                  <button className="w-full bg-black text-white py-3 rounded text-sm font-medium hover:bg-gray-800">
                     CHECKOUT
                   </button>
                 </Link>

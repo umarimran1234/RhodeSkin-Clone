@@ -20,7 +20,7 @@ const Checkout = () => {
           <h2 className="text-lg text-center font-medium mb-4">
             Express checkout
           </h2>
-          <div className="flex space-x-4 mb-8">
+          {/* <div className="flex space-x-4 mb-8">
             <button className="w-full py-1 flex justify-center bg-indigo-600 text-white font-medium rounded">
               <Image
                 src={"/ShopPay.svg"}
@@ -48,8 +48,8 @@ const Checkout = () => {
                 className="md:w-[100px] w-[70px] h-[35px]"
               ></Image>
             </button>
-          </div>
-          <div className="text-center text-gray-500 mb-6">OR</div>
+          </div> */}
+          {/* <div className="text-center text-gray-500 mb-6">OR</div> */}
 
           <form>
             <div className="mb-6">
@@ -74,7 +74,10 @@ const Checkout = () => {
                   className="w-full border border-gray-300 rounded px-4 py-2"
                   defaultValue="United States"
                 >
+                  <option>Pakistan</option>
                   <option>United States</option>
+                  <option>China</option>
+                  <option>Dubai</option>
                 </select>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -124,12 +127,12 @@ const Checkout = () => {
                 />
                 <span className="text-gray-400 text-sm">?</span>
               </div>
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 <input type="checkbox" id="text-news" />
                 <label htmlFor="text-news" className="text-sm text-gray-600">
                   Text me with news and offers (US & CA only)
                 </label>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex justify-between items-center">
@@ -153,7 +156,7 @@ const Checkout = () => {
             <p className="text-sm text-gray-700">$30.00</p>
           </div>
 
-          <div className="flex md:flex-row flex-col md:gap-0 gap-4 items-center space-x-4 mb-6">
+          {/* <div className="flex md:flex-row flex-col md:gap-0 gap-4 items-center space-x-4 mb-6">
             <input
               type="text"
               placeholder="Discount code or gift card"
@@ -162,7 +165,7 @@ const Checkout = () => {
             <button className="bg-gray-800 text-white py-2 px-4 rounded">
               Apply
             </button>
-          </div>
+          </div> */}
 
           <div className="mb-6">
             <div className="flex justify-between text-sm text-gray-700">

@@ -5,10 +5,24 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { useUser } from "@/authContaxt/authContxt.js";
-import { useParams } from "next/navigation.js";
+import { useParams, useRouter } from "next/navigation.js";
+import { useEffect } from "react";
+import { auth } from "@/Config/firebaseConfig.js";
 export default function Home() {
   const { products } = useUser();
   const { id } = useParams();
+  const router = useRouter();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        // Redirect to login/signup page if not authenticated
+        router.push("/account/login");
+      }
+    });
+
+    return () => unsubscribe(); // Cleanup
+  }, [router]);
   return (
     <div>
       <HtmlSlider products={products} id={id} />

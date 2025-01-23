@@ -4,12 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/Config/firebaseConfig"; // Firebase configuration file import
 import { signInWithEmailAndPassword } from "firebase/auth";
-
+import { useRouter } from "next/navigation";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -24,8 +25,9 @@ const LoginPage = () => {
       localStorage.setItem("uuid", user.user.uid);
       // Navigate to dashboard or desired page
     } catch (err) {
+      const cleanError = err.message.replace(/^Firebase:\s*/, "");
       // Show error message
-      setError(err.message || "Failed to log in. Please try again.");
+      setError(cleanError || "Failed to log in. Please try again.");
     } finally {
       setLoading(false); // Stop loading spinner
     }

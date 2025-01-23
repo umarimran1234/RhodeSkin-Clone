@@ -11,6 +11,7 @@ function Page() {
       <HeroSection
         title={"Meet With Zalmar Owners"}
         paragraph={"Zalmar The Monster of Fashion Industry"}
+        button={"MEET"}
       />
       <div className="container  bg-[#f1f0ed] mx-auto my-3 rounded-lg ">
         <div className=" bg-center  h-full rounded-xl flex flex-col justify-start gap-4 items-center py-8">

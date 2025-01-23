@@ -46,7 +46,10 @@ const RegisterPage = () => {
       setError("");
     } catch (err) {
       console.error(err);
-      setError(err.message || "Failed to create account.");
+      const cleanError = err.message.replace(/^Firebase:\s*/, "");
+      // Show error message
+
+      setError(cleanError || "Failed to create account.");
       setSuccess("");
     }
   };

@@ -22,9 +22,9 @@ const HeroSection = ({ title, paragraph, button }) => {
         </h2>
         <Link
           href={"/shop"}
-          className="border w-auto px-6 flex items-center justify-center gap-4  py-3 text-black bg-white rounded-full hover:bg-black hover:text-white font-medium transition"
+          className=" w-auto px-6 flex items-center border text-sm  justify-center gap-4  py-3 text-white    font-medium underline transition"
         >
-          {button} <FaArrowDown />
+          {button} <FaArrowDown className=" underline " />
         </Link>
       </div>
     </div>

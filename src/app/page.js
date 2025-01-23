@@ -32,7 +32,11 @@ export default function Home() {
   return (
     <>
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection
+        title={"ZALMAR STORE"}
+        paragraph={"STYLE THAT SPEAK YOUR LIFE STYLE"}
+        button={"HAPPY SHOPPING"}
+      />
 
       {/* Animated Sections */}
       <motion.div
