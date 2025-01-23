@@ -115,9 +115,11 @@ const Navbar = () => {
           <li>
             <Link href="#search"> MODULES </Link>
           </li>
-          <li>
-            <Link href="/account/login">ACCOUNT</Link>
-          </li>
+          {
+            <li>
+              <Link href="/account/login">ACCOUNT</Link>
+            </li>
+          }
           <li className=" w-full ">
             <Link href="#cart" onClick={() => setIsOpen(true)}>
               CART (0)
