@@ -77,9 +77,9 @@ const Navbar = () => {
         }`}
       >
         <div className="flex md:hidden justify-between items-center p-4">
-          <a href="#futures" className="text-5xl lg:px-56">
+          <Link href="/" className="text-5xl lg:px-56">
             zal<span className=" font-light ">mar</span>
-          </a>
+          </Link>
           <div className="flex items-center gap-4">
             <button
               className="md:hidden block text-white focus:outline-none"
