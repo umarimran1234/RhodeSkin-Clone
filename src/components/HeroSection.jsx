@@ -13,9 +13,10 @@ const HeroSection = () => {
       />
 
       {/* Centered Content */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
         <h1 className="text-4xl font-bold mb-4">ZALMAR STORE</h1>
-        <h2 className="text-2xl md:text-[34px] text-white font-medium mb-6">
+        <h2 className="text-2xl md:text-[34px] text-white  font-medium mb-6">
           STYLE THAT SPEAKS YOUR LIFE STYLE.
         </h2>
         <Link

@@ -240,15 +240,16 @@ function HtmlSlider({ products, id }) {
               </div>
               <p className="font-medium text-lg text-gray-900 mb-2">Color</p>
               <div className="mt-3 flex space-x-2">
-                {colors?.map((color, index) => (
-                  <span
-                    key={index}
-                    onClick={() => setColor(color)}
-                    className="h-4 w-4 cursor-pointer active:ring-2  rounded-full border border-gray-300"
-                    style={{ backgroundColor: color }}
-                    title={color}
-                  ></span>
-                ))}
+                {colors &&
+                  colors?.map((color, index) => (
+                    <span
+                      key={index}
+                      onClick={() => setColor(color)}
+                      className="h-4 w-4 cursor-pointer active:ring-2  rounded-full border border-gray-300"
+                      style={{ backgroundColor: color }}
+                      title={color}
+                    ></span>
+                  ))}
               </div>
               <div className="grid grid-cols-3 gap-3 mb-6 max-w-sm">
                 {/* <div className="color-box group">

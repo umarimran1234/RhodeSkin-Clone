@@ -48,7 +48,7 @@ const Navbar = () => {
       <nav
         className={`${
           show ? " bg-black" : "translate-y-7 bg-black"
-        } fixed w-full  z-50 top-5  transition-all duration-300 container mx-auto font-bold ${
+        } fixed w-full  z-50 top-6  transition-all duration-300   font-bold ${
           isScrolled
             ? "bg-black text-white"
             : "bg-black bg-opacity-40   text-white "

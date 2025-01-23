@@ -22,9 +22,8 @@ export default function HeaderAndFooter({
         {!shouldHideHeaderFooter && (
           <>
             <Announcement />
-            <div className="container mx-auto">
-              <Navbar />
-            </div>
+
+            <Navbar />
           </>
         )}
 

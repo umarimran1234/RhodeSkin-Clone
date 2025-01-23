@@ -96,7 +96,7 @@ const ForGotPAssword = () => {
                   href="/account/register"
                   className="font-semibold text-[#67645E] underline"
                 >
-                  {"  "} Sign up!
+                  Sign up!
                 </Link>
               </p>
             </div>
