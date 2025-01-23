@@ -8,11 +8,11 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const handleOutsideClick = (e) => {
-    if (e.target.id === "modal-overlay") {
-      setIsOpen(false);
-    }
-  };
+  // const handleOutsideClick = (e) => {
+  //   if (e.target.id === "modal-overlay") {
+  //     setIsOpen(false);
+  //   }
+  // };
 
   useEffect(() => {
     let lastScrollY = window.scrollY;

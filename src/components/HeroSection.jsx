@@ -1,6 +1,7 @@
 import Link from "next/link";
+import { FaArrowDown } from "react-icons/fa6";
 
-const HeroSection = () => {
+const HeroSection = ({ title, paragraph, button }) => {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {/* Background Video */}
@@ -15,15 +16,15 @@ const HeroSection = () => {
       {/* Centered Content */}
       <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
-        <h1 className="text-4xl font-bold mb-4">ZALMAR STORE</h1>
+        <h1 className="text-4xl font-bold mb-4">{title}</h1>
         <h2 className="text-2xl md:text-[34px] text-white  font-medium mb-6">
-          STYLE THAT SPEAKS YOUR LIFE STYLE.
+          {paragraph}
         </h2>
         <Link
           href={"/shop"}
-          className="border w-auto px-6 py-3 text-black bg-white rounded-full hover:bg-black hover:text-white font-medium transition"
+          className="border w-auto px-6 flex items-center justify-center gap-4  py-3 text-black bg-white rounded-full hover:bg-black hover:text-white font-medium transition"
         >
-          SHOP Now
+          {button} <FaArrowDown />
         </Link>
       </div>
     </div>

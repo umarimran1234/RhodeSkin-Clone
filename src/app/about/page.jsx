@@ -3,28 +3,15 @@ import React from "react";
 import { MdFacebook } from "react-icons/md";
 import { FaLinkedin } from "react-icons/fa6";
 import Link from "next/link";
+import HeroSection from "@/components/HeroSection";
 
 function Page() {
   return (
     <>
-      <div className="container mx-auto">
-        <div className="relative h-screen">
-          <video
-            className="absolute rounded-xl top-0 left-0 w-full h-full object-cover"
-            src="/HeroSectionVideo.mp4"
-            autoPlay
-            loop
-            muted
-          />
-          <div className="absolute bottom-10 left-10 text-white">
-            <h1 className="font-bold">zalmar store</h1>
-            <h2 className="text-[34px]">style that speak your life style</h2>
-            <button className="border w-2/3 h-[35px] px-4 py-1 rounded-full hover:bg-white hover:text-gray-500 font-medium transition">
-              SHOP HER FAVES
-            </button>
-          </div>
-        </div>
-      </div>
+      <HeroSection
+        title={"Meet With Zalmar Owners"}
+        paragraph={"Zalmar The Monster of Fashion Industry"}
+      />
       <div className="container  bg-[#f1f0ed] mx-auto my-3 rounded-lg ">
         <div className=" bg-center  h-full rounded-xl flex flex-col justify-start gap-4 items-center py-8">
           <h1 className=" text-black font-bold text-2xl "> A NOTE FROM US </h1>
