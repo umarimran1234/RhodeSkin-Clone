@@ -13,16 +13,16 @@ import { useRouter } from "next/navigation";
 import { useUser } from "@/authContaxt/authContxt";
 import Image from "next/image";
 const Navbar = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [userid, setUserId] = useState();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState();
   const Router = useRouter();
   const { cartItem, getUserCart } = useUser();
 
   const total = cartItem?.reduce((acc, item) => acc + item?.price, 0);
-  const userId = localStorage.getItem("uuid");
 
   const handleOutsideClick = (e) => {
     if (e.target.id === "modal-overlay") {
@@ -30,19 +30,24 @@ const Navbar = () => {
     }
   };
   useEffect(() => {
-    // Check for UUID in localStorage
-    const uuid = localStorage.getItem("uuid");
-
-    if (uuid) {
-      setIsLoggedIn(true);
-    } else {
-      setIsLoggedIn(false);
+    // Re-check for UUID if necessary
+    if (typeof window !== "undefined") {
+      const uuid = localStorage.getItem("uuid");
+      setUserId(uuid);
+      setIsLoggedIn(!!uuid);
     }
-  }, []);
-  const handlDeleteCart = (userid, itemId) => {
-    deleteFromCart(userid, itemId);
-    getUserCart();
+  }, [userid]);
+
+  const handlDeleteCart = async (userid, itemId) => {
+    try {
+      if (!userid) throw new Error("User ID not available");
+      await deleteFromCart(userid, itemId);
+      await getUserCart();
+    } catch (error) {
+      console.error("Error deleting cart item:", error);
+    }
   };
+
   const handleLogout = async () => {
     try {
       await auth.signOut();
@@ -58,14 +63,12 @@ const Navbar = () => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      // Change navbar visibility on scroll direction
       if (window.scrollY < lastScrollY) {
         setShow(false);
       } else {
         setShow(true);
       }
 
-      // Check if user has scrolled from the top
       if (window?.scrollY > 0) {
         setIsScrolled(true);
       } else {
@@ -87,11 +90,11 @@ const Navbar = () => {
     <>
       <nav
         className={`${
-          show ? " bg-black" : "translate-y-7 bg-black"
-        } fixed w-full  z-50 top-6  transition-all duration-300   font-bold ${
+          show ? " -translate-y-7 bg-black" : "translate-y-7 bg-black"
+        } fixed w-full   z-50 top-7  transition-all duration-300   font-bold ${
           isScrolled
             ? "bg-black text-white"
-            : "bg-black bg-opacity-40   text-white "
+            : "bg-transparent  border-b border-white bg-opacity-40   text-white "
         }`}
       >
         <div className="flex md:hidden justify-between items-center p-4">
@@ -198,8 +201,7 @@ const Navbar = () => {
                 </p>
                 {cartItem?.length !== 0 ? (
                   cartItem?.map((item, index) => (
-                    <Link
-                      href={"/product_view/" + item?.id}
+                    <div
                       key={item?.id || index} // Ensure a unique key is provided
                       className="flex items-center justify-between mt-4"
                     >
@@ -224,13 +226,13 @@ const Navbar = () => {
                           {item?.price} rs
                         </button>
                         <button
-                          onClick={() => handlDeleteCart(userId, item?.id)}
+                          onClick={() => handlDeleteCart(userid, item?.id)}
                           className="bg-black  text-white text-sm px-4 py-2 rounded flex items-center justify-center"
                         >
                           <MdDelete />
                         </button>
                       </div>
-                    </Link>
+                    </div>
                   ))
                 ) : (
                   <div className="text-center mb-52">

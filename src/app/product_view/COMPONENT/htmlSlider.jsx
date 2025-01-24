@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
@@ -7,12 +7,14 @@ import { addToCart } from "@/lib/cartUtils";
 import { color } from "framer-motion";
 import { useUser } from "@/authContaxt/authContxt";
 import Link from "next/link";
+import { auth } from "@/Config/firebaseConfig.js";
+import { useRouter } from "next/navigation";
 function HtmlSlider({ products, id }) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const product = products?.find((product) => product?.id === id);
   const [loading, setLoading] = useState(false);
-  const uuid = localStorage?.getItem("uuid");
   const { getUserCart } = useUser();
+  const [uuid, setUserID] = useState(null);
   const [increement, setIncreement] = React.useState(1);
   const [colorss, setColor] = useState();
   const colors =
@@ -21,14 +23,33 @@ function HtmlSlider({ products, id }) {
       : product?.category === "T-SHIRT"
       ? ["#5C4033 ", "#FFFDD0"]
       : [];
+  const router = useRouter();
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUUID = localStorage?.getItem("uuid");
+      if (storedUUID) {
+        setUserID(storedUUID);
+      }
+    }
+  }, []);
   const handleAddToCart = async () => {
     setLoading(true);
+
+    const user = auth.currentUser;
+
+    if (!user) {
+      router.push("/account/login");
+      setLoading(false);
+      return;
+    }
+
     if (!colorss) {
       alert("Please select color");
       setLoading(false);
       return;
     }
+
     try {
       await addToCart(
         uuid,
@@ -40,14 +61,18 @@ function HtmlSlider({ products, id }) {
         colorss
       );
       alert("Product added to cart!");
+
       setIncreement(1);
       setColor(null);
+
+      getUserCart();
     } catch (error) {
       alert(error.message);
     }
-    getUserCart();
+
     setLoading(false);
   };
+
   return (
     <section className="py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

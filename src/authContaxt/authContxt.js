@@ -10,6 +10,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [idOfUser, setIdOfUser] = useState(null);
   const [cartItem, setCarItem] = useState([]);
   const [products, setProducts] = useState([]);
   const db = getFirestore(app);
@@ -40,11 +41,17 @@ export const UserProvider = ({ children }) => {
       setCarItem([]);
     }
   }, [user]);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const userID = localStorage.getItem("uuid");
+      if (userID) {
+        setIdOfUser(userID);
+      }
+    }
+  }, []);
   const getUserCart = async () => {
-    const user = localStorage.getItem("uuid");
-
-    if (user) {
-      const cartRef = collection(db, "users", user, "cart");
+    if (idOfUser) {
+      const cartRef = collection(db, "users", idOfUser, "cart");
       const cartSnapshot = await getDocs(cartRef);
 
       const cartItems = cartSnapshot.docs.map((doc) => ({
@@ -52,7 +59,7 @@ export const UserProvider = ({ children }) => {
         ...doc.data(),
       }));
       setCarItem(cartItems);
-      console.log("User's Cart Items:", cartItems);
+
       return cartItems;
     } else {
       console.log("User is not signed in");

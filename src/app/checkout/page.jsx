@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@/authContaxt/authContxt";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Ring } from "react-css-spinners";
 const Checkout = () => {
@@ -15,6 +15,7 @@ const Checkout = () => {
   const navigation = useRouter();
   const [apparTMent, setAppartMent] = useState();
   const [city, setcity] = useState();
+  const [userID, setUserID] = useState(null);
   const [state, setState] = useState();
   const [zip, setZip] = useState();
   const [Phone, setPhone] = useState();
@@ -27,11 +28,19 @@ const Checkout = () => {
     );
     justMore = [...justMore, ...tShirtProducts];
   }
-  const userID = localStorage.getItem("uuid");
 
-  if (!userID) {
-    navigation.push("/account/login");
-  }
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const storedUUID = localStorage.getItem("uuid");
+      if (storedUUID) {
+        setUserID(storedUUID);
+      } else {
+        navigation.push("/account/login"); // Redirect to login if no UUID
+      }
+    }
+  }, [navigation]);
+  console.log(userID, "userId");
+
   const htmlTemplate = `
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.5;">
       <h2 style="color: #007BFF;">New Order Received</h2>
@@ -314,11 +323,11 @@ const Checkout = () => {
 
           {/* Right Section */}
           <div className="bg-white p-6 shadow rounded">
-            <div className="flex justify-between items-center mb-6">
+            <div className="flex justify-start flex-col  items-start mb-6">
               {cartItem &&
                 cartItem.map((item, index) => (
                   <>
-                    <div key={index}>
+                    <div key={index} className="w-full">
                       <p className="text-sm text-gray-700">
                         {item?.productName}
                       </p>

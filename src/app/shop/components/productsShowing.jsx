@@ -8,8 +8,9 @@ function ProductsShowing() {
   const { products } = useUser();
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState(products);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [loading, setLoading] = useState(true); // Add loading state
 
   const categories = ["HOODIE", "T-SHIRT", "FULL-SLIP", "HALF-SLIP"];
 
@@ -30,6 +31,7 @@ function ProductsShowing() {
     });
 
     setFilteredProducts(filtered);
+    setLoading(false); // Set loading to false when data is ready
   };
 
   // Handle category change
@@ -45,9 +47,22 @@ function ProductsShowing() {
   // Trigger product filter when category or search query changes
   useEffect(() => {
     setIsAnimating(true); // Start animation
+    setLoading(true); // Start loading state
     filterProducts();
     setTimeout(() => setIsAnimating(false), 500); // Reset animation state after filter
   }, [selectedCategory, searchQuery]);
+
+  // Skeleton Loader Component
+  const SkeletonLoader = () => (
+    <div className="group flex flex-col overflow-hidden border border-gray-100 bg-white shadow-md rounded-lg p-4">
+      <div className="h-60 bg-gray-200 animate-pulse rounded-md"></div>
+      <div className="mt-4">
+        <div className="h-6 bg-gray-200 animate-pulse mb-2 rounded-md"></div>
+        <div className="h-4 bg-gray-200 animate-pulse mb-4 rounded-md w-2/3"></div>
+        <div className="h-8 bg-gray-200 animate-pulse rounded-md w-full"></div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -91,90 +106,94 @@ function ProductsShowing() {
 
           {/* Product Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {filteredProducts?.length === 0 && (
+            {loading ? (
+              // Show skeleton loader when loading
+              Array(4)
+                .fill()
+                .map((_, index) => <SkeletonLoader key={index} />)
+            ) : filteredProducts?.length === 0 ? (
               <div className="col-span-full text-center text-gray-500">
                 No products found.
               </div>
-            )}
+            ) : (
+              filteredProducts?.map((product, index) => (
+                <div
+                  key={index || product?.id}
+                  className={`group flex flex-col overflow-hidden border border-gray-100 bg-white shadow-md rounded-lg transition-all transform ${
+                    isAnimating
+                      ? "opacity-0 translate-y-4"
+                      : "opacity-100 translate-y-0"
+                  } duration-500 ease-out hover:scale-105 hover:shadow-xl`}
+                >
+                  {/* Product Image */}
+                  <div className="relative flex h-60 overflow-hidden">
+                    <div className="flex">
+                      <img
+                        className="absolute top-0 right-0 h-full w-full object-cover transition-all duration-300 ease-in-out group-hover:scale-110"
+                        src={product?.image}
+                        alt="product image"
+                      />
+                    </div>
+                    {/* Product Image Controls */}
+                    <div className="absolute bottom-0 mb-4 flex w-full justify-center space-x-4">
+                      <div className="h-3 w-3 rounded-full border-2 border-white bg-white"></div>
+                      <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
+                      <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
+                    </div>
+                    <div className="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
+                      <button className="flex h-10 w-10 items-center justify-center bg-gray-900 text-white transition-transform transform hover:scale-110 duration-300">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
 
-            {products?.map((product, index) => (
-              <div
-                key={index || product?.id}
-                className={`group flex flex-col overflow-hidden border border-gray-100 bg-white shadow-md rounded-lg transition-all transform ${
-                  isAnimating
-                    ? "opacity-0 translate-y-4"
-                    : "opacity-100 translate-y-0"
-                } duration-500 ease-out hover:scale-105 hover:shadow-xl`}
-              >
-                {/* Product Image */}
-                <a className="relative flex h-60 overflow-hidden" href="#">
-                  <div className="flex">
-                    <img
-                      className="absolute top-0 right-0 h-full w-full object-cover transition-all duration-300 ease-in-out group-hover:scale-110"
-                      src={product?.image}
-                      alt="product image"
-                    />
-                  </div>
-                  {/* } */}
-                  <div className="absolute bottom-0 mb-4 flex w-full justify-center space-x-4">
-                    <div className="h-3 w-3 rounded-full border-2 border-white bg-white"></div>
-                    <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
-                    <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
-                  </div>
-                  <div className="absolute -right-16 bottom-0 mr-2 mb-4 space-y-2 transition-all duration-300 group-hover:right-0">
-                    <button className="flex h-10 w-10 items-center justify-center bg-gray-900 text-white transition-transform transform hover:scale-110 duration-300">
+                  {/* Product Details */}
+                  <div className="mt-4 px-5 pb-5">
+                    <a href="#">
+                      <h5 className="text-lg font-medium text-gray-800 capitalize transition-all duration-300 ease-in-out transform hover:text-gray-700">
+                        {product.name}
+                      </h5>
+                    </a>
+                    <div className="mt-2 mb-5 flex items-center justify-between">
+                      <p className="flex items-center space-x-2">
+                        <span className="text-2xl font-bold text-gray-900">
+                          RS {product.price}
+                        </span>
+                        <span className="text-sm text-gray-500 line-through">
+                          RS {product.oldPrice}
+                        </span>
+                      </p>
+                    </div>
+                    {/* Add to Cart Button */}
+                    <Link
+                      href={`/product_view/${product?.id}`}
+                      className="flex items-center justify-center bg-gray-900 px-4 py-2 text-sm text-white transition-transform transform hover:scale-110 hover:bg-gray-700 rounded duration-300"
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        className="h-5 w-5"
+                        className="mr-2 h-5 w-5"
                         viewBox="0 0 20 20"
                         fill="currentColor"
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-                          clipRule="evenodd"
-                        />
+                        <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
                       </svg>
-                    </button>
+                      PRODUCT VIEW
+                    </Link>
                   </div>
-                </a>
-
-                {/* Product Details */}
-                <div className="mt-4 px-5 pb-5">
-                  <a href="#">
-                    <h5 className="text-lg font-medium text-gray-800 capitalize transition-all duration-300 ease-in-out transform hover:text-gray-700">
-                      {product.name}
-                    </h5>
-                  </a>
-                  <div className="mt-2 mb-5 flex items-center justify-between">
-                    <p className="flex items-center space-x-2">
-                      <span className="text-2xl font-bold text-gray-900">
-                        RS {product.price}
-                      </span>
-                      <span className="text-sm text-gray-500 line-through">
-                        RS {product.oldPrice}
-                      </span>
-                    </p>
-                  </div>
-                  {/* Add to Cart Button */}
-                  <Link
-                    href={`/product_view/${product?.id}`}
-                    className="flex items-center justify-center bg-gray-900 px-4 py-2 text-sm text-white transition-transform transform hover:scale-110 hover:bg-gray-700 rounded duration-300"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="mr-2 h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
-                      <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
-                    </svg>
-                    {/* Add to cart */}
-                    PRODUCT VIEW
-                  </Link>
                 </div>
-              </div>
-            ))}
+              ))
+            )}
           </div>
         </div>
       </section>

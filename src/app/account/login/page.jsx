@@ -25,7 +25,9 @@ const LoginPage = () => {
       alert("Login successful! 🎉");
       console.log(user);
       router.push("/");
-      localStorage.setItem("uuid", user.user.uid);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("uuid", user.user.uid);
+      }
     } catch (err) {
       const cleanError = err.message.replace(/^Firebase:\s*/, "");
       // Show error message

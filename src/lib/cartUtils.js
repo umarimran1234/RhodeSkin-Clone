@@ -70,5 +70,3 @@ export const deleteFromCart = async (userid, productId) => {
     console.error("Error deleting product from cart:", error.message);
   }
 };
-
-const userId = localStorage.getItem("uuid");
