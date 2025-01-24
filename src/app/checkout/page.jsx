@@ -35,61 +35,60 @@ const Checkout = () => {
       if (storedUUID) {
         setUserID(storedUUID);
       } else {
-        navigation.push("/account/login"); // Redirect to login if no UUID
+        navigation.push("/account/login");
       }
     }
   }, [navigation]);
   console.log(userID, "userId");
 
-  const htmlTemplate = `
-    <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.5;">
-      <h2 style="color: #007BFF;">New Order Received</h2>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Address:</strong> ${address}</p>
-      <h3>Order Details:</h3>
-      <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
-        <thead>
-          <tr>
-            <th style="border: 1px solid #ddd; padding: 8px;">#</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Product Name</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Color</th>
-            <th style="border: 1px solid #ddd; padding: 8px;">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${cartItem
-            .map(
-              (product, index) => `
-              <tr>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${
-                  index + 1
-                }</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">${
-                  product.productName
-                }</td>
-                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${
-                  product.quantity
-                }</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">${
-                  product.color
-                }</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">${
-                  product.price
-                } PKR</td>
-                                 <td style="border: 1px solid #ddd; padding: 8px;"> 
-                                   <image src={ ${product?.imageUrl} } />
-                                  PKR</td>
-              </tr>
-            `
-            )
-            .join("")}
-        </tbody>
-      </table>
-      <p style="margin-top: 20px;">Thank you for your order!</p>
-    </div>
-  `;
+  //   <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.5;">
+  //     <h2 style="color: #007BFF;">New Order Received</h2>
+  //     <p><strong>Name:</strong> ${name}</p>
+  //     <p><strong>Email:</strong> ${email}</p>
+  //     <p><strong>Address:</strong> ${address}</p>
+  //     <h3>Order Details:</h3>
+  //     <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+  //       <thead>
+  //         <tr>
+  //           <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+  //           <th style="border: 1px solid #ddd; padding: 8px;">Product Name</th>
+  //           <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
+  //           <th style="border: 1px solid #ddd; padding: 8px;">Color</th>
+  //           <th style="border: 1px solid #ddd; padding: 8px;">Price</th>
+  //         </tr>
+  //       </thead>
+  //       <tbody>
+  //         ${cartItem
+  //           .map(
+  //             (product, index) => `
+  //             <tr>
+  //               <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${
+  //                 index + 1
+  //               }</td>
+  //               <td style="border: 1px solid #ddd; padding: 8px;">${
+  //                 product.productName
+  //               }</td>
+  //               <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${
+  //                 product.quantity
+  //               }</td>
+  //               <td style="border: 1px solid #ddd; padding: 8px;">${
+  //                 product.color
+  //               }</td>
+  //               <td style="border: 1px solid #ddd; padding: 8px;">${
+  //                 product.price
+  //               } PKR</td>
+  //                                <td style="border: 1px solid #ddd; padding: 8px;">
+  //                                  <image src={ ${product?.imageUrl} } />
+  //                                 PKR</td>
+  //             </tr>
+  //           `
+  //           )
+  //           .join("")}
+  //       </tbody>
+  //     </table>
+  //     <p style="margin-top: 20px;">Thank you for your order!</p>
+  //   </div>
+  // `;
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -103,7 +102,7 @@ const Checkout = () => {
       email,
       zip,
       state,
-      products: htmlTemplate,
+
       apparTMent,
       country,
     };
