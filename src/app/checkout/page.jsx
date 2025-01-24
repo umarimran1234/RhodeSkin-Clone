@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useUser } from "@/authContaxt/authContxt";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { Ring } from "react-css-spinners";
 const Checkout = () => {
   const { cartItem, products } = useUser();
@@ -11,7 +12,7 @@ const Checkout = () => {
   const [country, setCountry] = useState();
   const [firstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
-
+  const navigation = useRouter();
   const [apparTMent, setAppartMent] = useState();
   const [city, setcity] = useState();
   const [state, setState] = useState();
@@ -25,6 +26,11 @@ const Checkout = () => {
       (product) => product?.category === "T-SHIRT"
     );
     justMore = [...justMore, ...tShirtProducts];
+  }
+  const userID = localStorage.getItem("uuid");
+
+  if (!userID) {
+    navigation.push("/account/login");
   }
   const htmlTemplate = `
     <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.5;">
