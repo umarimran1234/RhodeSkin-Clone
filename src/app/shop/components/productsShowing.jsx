@@ -99,7 +99,7 @@ function ProductsShowing() {
 
             {products?.map((product, index) => (
               <div
-                key={index}
+                key={index || product?.id}
                 className={`group flex flex-col overflow-hidden border border-gray-100 bg-white shadow-md rounded-lg transition-all transform ${
                   isAnimating
                     ? "opacity-0 translate-y-4"

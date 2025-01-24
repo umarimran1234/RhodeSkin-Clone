@@ -46,9 +46,9 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {TSHIRTS?.map((item) =>
-            item?.colorImages?.map((images) => (
+            item?.colorImages?.map((images, index) => (
               <div key={item?.id}>
-                <ProductGrid product={item} item={images} />
+                <ProductGrid index={index} product={item} item={images} />
               </div>
             ))
           )}

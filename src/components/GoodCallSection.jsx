@@ -16,7 +16,7 @@ const GoodCallSection = ({ image }) => {
       <div className="flex md:flex-row-reverse flex-col-reverse">
         {/* First Child Element */}
         <Image
-          src={imageSrc}
+          src={imageSrc || null}
           alt="Travel Section Image"
           width={1000}
           height={1000}

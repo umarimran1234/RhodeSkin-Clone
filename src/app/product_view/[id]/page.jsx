@@ -16,12 +16,11 @@ export default function Home() {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (!user) {
-        // Redirect to login/signup page if not authenticated
         router.push("/account/login");
       }
     });
 
-    return () => unsubscribe(); // Cleanup
+    return () => unsubscribe();
   }, [router]);
   return (
     <div>

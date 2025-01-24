@@ -1,7 +1,126 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-
+import { useUser } from "@/authContaxt/authContxt";
+import { useState } from "react";
 const Checkout = () => {
+  const { cartItem, products } = useUser();
+  const [email, setEmail] = useState();
+  const [address, setAddress] = useState();
+  const [country, setCountry] = useState();
+  const [firstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+
+  const [apparTMent, setAppartMent] = useState();
+  const [city, setcity] = useState();
+  const [state, setState] = useState();
+  const [zip, setZip] = useState();
+  const [Phone, setPhone] = useState();
+  const total = cartItem?.reduce((acc, item) => acc + item?.price, 0);
+  let justMore = cartItem.filter((item) => item?.category === "Zalmar Hoodies");
+
+  if (cartItem.some((item) => item?.productName === "Zalmar Hoodies")) {
+    const tShirtProducts = products?.filter(
+      (product) => product?.category === "T-SHIRT"
+    );
+    justMore = [...justMore, ...tShirtProducts];
+  }
+  const htmlTemplate = `
+    <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.5;">
+      <h2 style="color: #007BFF;">New Order Received</h2>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <h3>Order Details:</h3>
+      <table style="border-collapse: collapse; width: 100%; margin-top: 10px;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid #ddd; padding: 8px;">#</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Product Name</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Quantity</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Color</th>
+            <th style="border: 1px solid #ddd; padding: 8px;">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${cartItem
+            .map(
+              (product, index) => `
+              <tr>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${
+                  index + 1
+                }</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">${
+                  product.productName
+                }</td>
+                <td style="border: 1px solid #ddd; padding: 8px; text-align: center;">${
+                  product.quantity
+                }</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">${
+                  product.color
+                }</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">${
+                  product.price
+                } PKR</td>
+                                 <td style="border: 1px solid #ddd; padding: 8px;"> 
+                                   <image src={ ${product?.imageUrl} } />
+                                  PKR</td>
+              </tr>
+            `
+            )
+            .join("")}
+        </tbody>
+      </table>
+      <p style="margin-top: 20px;">Thank you for your order!</p>
+    </div>
+  `;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const formattedProducts = cartItem;
+
+    const formData = {
+      firstName,
+      LastName,
+      address,
+      Phone,
+      email,
+      zip,
+      state,
+      products: htmlTemplate,
+      apparTMent,
+      country,
+    };
+    try {
+      const response = await fetch(
+        "https://formsubmit.co/ajax/umartkd989@gmail.com",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        alert("Your order has been submitted successfully!");
+        // Optionally, reset the form
+        setFormData({
+          name: "",
+          email: "",
+          product: "",
+          quantity: "",
+          message: "",
+        });
+      } else {
+        alert("There was an error submitting your order.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was an error submitting your order.");
+    }
+  };
+
   return (
     <div className="bg-gray-50 min-h-screen mt-20 py-10 px-4 md:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -9,7 +128,7 @@ const Checkout = () => {
         <div className="lg:col-span-2">
           <div className="text-center">
             <Link href="/" className="text-8xl">
-              <span className="">zal</span>
+              <span className="font-medium">zal</span>
               <span className="font-light">mar</span>
             </Link>
             <nav className="text-sm text-gray-600 my-6">
@@ -51,12 +170,14 @@ const Checkout = () => {
           </div> */}
           {/* <div className="text-center text-gray-500 mb-6">OR</div> */}
 
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-6">
               <h3 className="text-lg font-medium mb-2">Contact</h3>
               <input
                 type="email"
                 placeholder="Email"
+                name="email"
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full border border-gray-300 rounded px-4 py-2 mb-2"
               />
               <div className="flex items-center space-x-2">
@@ -71,23 +192,27 @@ const Checkout = () => {
               <h3 className="text-lg font-medium mb-2">Shipping address</h3>
               <div className="mb-4">
                 <select
+                  onChange={(e) => setCountry(e.target.value)}
                   className="w-full border border-gray-300 rounded px-4 py-2"
                   defaultValue="United States"
                 >
-                  <option>Pakistan</option>
-                  <option>United States</option>
-                  <option>China</option>
-                  <option>Dubai</option>
+                  <option value={"pakistan"}>Pakistan</option>
+                  <option value={"united states"}>United States</option>
+                  <option value={"china"}>China</option>
+                  <option value={"dubai"}>Dubai</option>
                 </select>
               </div>
+              <input type="hidden" name="_cc" value="umartkd989@gmail.com," />
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                 <input
                   type="text"
+                  onChange={(e) => setFirstName(e.target.value)}
                   placeholder="First name"
                   className="border border-gray-300 rounded px-4 py-2"
                 />
                 <input
                   type="text"
+                  onChange={(e) => setLastName(e.target.value)}
                   placeholder="Last name"
                   className="border border-gray-300 rounded px-4 py-2"
                 />
@@ -95,26 +220,31 @@ const Checkout = () => {
               <input
                 type="text"
                 placeholder="Address"
+                onChange={(e) => setAddress(e.target.value)}
                 className="w-full border border-gray-300 rounded px-4 py-2 mb-4"
               />
               <input
                 type="text"
                 placeholder="Apartment, suite, etc. (optional)"
+                onChange={(e) => setAddress(e.target.value)}
                 className="w-full border border-gray-300 rounded px-4 py-2 mb-4"
               />
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                 <input
+                  onChange={(e) => setcity(e.target.value)}
                   type="text"
                   placeholder="City"
                   className="border border-gray-300 rounded px-4 py-2"
                 />
                 <input
                   type="text"
+                  onChange={(e) => setState(e.target.value)}
                   placeholder="State"
                   className="border border-gray-300 rounded px-4 py-2"
                 />
                 <input
                   type="text"
+                  onChange={(e) => setZip(e.target.value)}
                   placeholder="ZIP code"
                   className="border border-gray-300 rounded px-4 py-2"
                 />
@@ -122,6 +252,7 @@ const Checkout = () => {
               <div className="flex items-center space-x-4 mb-4">
                 <input
                   type="text"
+                  onChange={(e) => setPhone(e.target.value)}
                   placeholder="Phone"
                   className="w-full border border-gray-300 rounded px-4 py-2"
                 />
@@ -136,11 +267,14 @@ const Checkout = () => {
             </div>
 
             <div className="flex justify-between items-center">
-              <Link href="#" className="text-sm text-gray-600">
+              <Link href="/shop" className="text-sm text-gray-600">
                 Return to cart
               </Link>
-              <button className="bg-gray-800 text-white py-2 px-4 rounded">
-                Continue to shipping
+              <button
+                type="submit"
+                className="bg-gray-800 text-white py-2 px-4 rounded"
+              >
+                Order now
               </button>
             </div>
           </form>
@@ -149,11 +283,16 @@ const Checkout = () => {
         {/* Right Section */}
         <div className="bg-white p-6 shadow rounded">
           <div className="flex justify-between items-center mb-6">
-            <div>
-              <p className="text-sm text-gray-700">pineapple refresh</p>
-              <p className="text-xs text-gray-500">big (5 oz)</p>
-            </div>
-            <p className="text-sm text-gray-700">$30.00</p>
+            {cartItem &&
+              cartItem.map((item, index) => (
+                <>
+                  <div key={index}>
+                    <p className="text-sm text-gray-700">{item?.productName}</p>
+                    <p className="text-xs text-gray-500">({item?.quantity})</p>
+                  </div>
+                  <p className="text-sm text-gray-700"> RS {item?.price}</p>
+                </>
+              ))}
           </div>
 
           {/* <div className="flex md:flex-row flex-col md:gap-0 gap-4 items-center space-x-4 mb-6">
@@ -168,36 +307,45 @@ const Checkout = () => {
           </div> */}
 
           <div className="mb-6">
-            <div className="flex justify-between text-sm text-gray-700">
+            {/* <div className="flex justify-between text-sm text-gray-700">
               <p>Subtotal</p>
               <p>$30.00</p>
-            </div>
-            <div className="flex justify-between text-sm text-gray-500">
+            </div> */}
+            {/* <div className="flex justify-between text-sm text-gray-500">
               <p>Shipping</p>
               <p>Calculated at next step</p>
-            </div>
+            </div> */}
           </div>
 
           <div className="flex justify-between text-lg font-medium mb-6">
             <p>Total</p>
-            <p>USD $30.00</p>
+            <p>{total}</p>
           </div>
 
           <div className="mb-6">
             <h3 className="text-lg font-medium mb-2">Just one more thing</h3>
-            <div className="border border-gray-300 rounded p-4 mb-4">
-              <div className="flex justify-between items-center">
-                <p className="text-sm text-gray-700">glazing milk</p>
-                <p className="text-sm text-gray-700">$32.00</p>
-              </div>
-              <p className="text-xs text-gray-500">big (4.7 oz)</p>
-            </div>
-            <div className="border border-gray-300 rounded p-4">
+            {justMore &&
+              justMore?.map((item, index) => (
+                <>
+                  <div className="border border-gray-300 rounded p-4 mb-4">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <p className="text-sm text-gray-700">{item?.name}</p>
+                        <p className="text-sm text-gray-700">
+                          RS {item?.price}
+                        </p>
+                      </div>
+                      <Image src={item?.image} height={30} width={30} />
+                    </div>
+                  </div>
+                </>
+              ))}
+            {/* <div className="border border-gray-300 rounded p-4">
               <div className="flex justify-between items-center">
                 <p className="text-sm text-gray-700">barrier restore cream</p>
                 <p className="text-sm text-gray-700">$32.00</p>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

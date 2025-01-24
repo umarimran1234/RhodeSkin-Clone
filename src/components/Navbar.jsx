@@ -6,6 +6,7 @@ import {
   MdOutlineAddShoppingCart,
   MdShoppingCart,
 } from "react-icons/md";
+import { Ring } from "react-css-spinners/dist/Ring";
 import { deleteFromCart } from "@/lib/cartUtils";
 import { auth } from "@/Config/firebaseConfig";
 import { useRouter } from "next/navigation";
@@ -18,7 +19,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState();
   const Router = useRouter();
-  const { cartItem } = useUser();
+  const { cartItem, getUserCart } = useUser();
 
   const total = cartItem?.reduce((acc, item) => acc + item?.price, 0);
   const userId = localStorage.getItem("uuid");
@@ -40,6 +41,7 @@ const Navbar = () => {
   }, []);
   const handlDeleteCart = (userid, itemId) => {
     deleteFromCart(userid, itemId);
+    getUserCart();
   };
   const handleLogout = async () => {
     try {
@@ -196,7 +198,8 @@ const Navbar = () => {
                 </p>
                 {cartItem?.length !== 0 ? (
                   cartItem?.map((item, index) => (
-                    <div
+                    <Link
+                      href={"/product_view/" + item?.id}
                       key={item?.id || index} // Ensure a unique key is provided
                       className="flex items-center justify-between mt-4"
                     >
@@ -227,7 +230,7 @@ const Navbar = () => {
                           <MdDelete />
                         </button>
                       </div>
-                    </div>
+                    </Link>
                   ))
                 ) : (
                   <div className="text-center mb-52">

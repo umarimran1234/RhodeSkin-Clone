@@ -3,12 +3,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-function ProductGrid({ product, item }) {
-  const isLoading = (!product && item) || product.length === 0; // Check if data is still loading
+function ProductGrid({ product, item, index }) {
+  const isLoading = (!product && item) || product?.length === 0;
 
   return (
     <>
       <div
+        key={index}
         className={`group flex flex-col overflow-hidden border border-gray-100 bg-white shadow-md rounded-lg transition-all transform 
            duration-500 ease-out hover:scale-105 hover:shadow-xl`}
       >
@@ -18,7 +19,9 @@ function ProductGrid({ product, item }) {
           href={`/product_view/${[product?.id]}`}
         >
           <div className="flex">
-            <img
+            <Image
+              width={300}
+              height={300}
               className="absolute top-0 right-0 h-full w-full object-cover transition-all duration-300 ease-in-out group-hover:scale-110"
               src={item || null}
               alt="product image"
