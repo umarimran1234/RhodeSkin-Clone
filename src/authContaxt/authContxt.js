@@ -10,7 +10,7 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [cartItem, setCarItem] = useState();
+  const [cartItem, setCarItem] = useState([]);
   const [products, setProducts] = useState([]);
   const db = getFirestore(app);
 

@@ -9,8 +9,8 @@ import { color } from "framer-motion";
 function HtmlSlider({ products, id }) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const product = products?.find((product) => product.id === id);
+  const [loading, setLoading] = useState(false);
   const uuid = localStorage?.getItem("uuid");
-  console.log(uuid);
 
   const [increement, setIncreement] = React.useState(1);
   const [colorss, setColor] = useState();
@@ -22,6 +22,7 @@ function HtmlSlider({ products, id }) {
       : [];
 
   const handleAddToCart = async () => {
+    setLoading(true);
     try {
       await addToCart(
         uuid,
@@ -36,6 +37,7 @@ function HtmlSlider({ products, id }) {
     } catch (error) {
       alert(error.message);
     }
+    setLoading(false);
   };
   return (
     <section className="py-24">
@@ -417,7 +419,7 @@ function HtmlSlider({ products, id }) {
                       stroke-linecap="round"
                     />
                   </svg>
-                  Add to cart
+                  {loading ? "Adding to cart..." : "Add to cart"}
                 </button>
               </div>
               <button className="text-center w-full px-5 py-4 rounded-[100px] bg-black flex items-center justify-center font-semibold text-lg text-white shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-700 text-xl hover:shadow-indigo-300">
