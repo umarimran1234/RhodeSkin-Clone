@@ -1,7 +1,15 @@
 // utils/cartUtils.js
-import { collection, doc, setDoc } from "firebase/firestore";
+import {
+  arrayRemove,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
 import { db } from "@/Config/firebaseConfig";
-
+import { useUser } from "@/authContaxt/authContxt";
 /**
  * Add a product to the user's cart in Firestore, along with address and color
  * @param {string} userid - The current authenticated user
@@ -12,6 +20,7 @@ import { db } from "@/Config/firebaseConfig";
  * @param {string} imageUrl - The URL of the product image
  * @param {string} color - The selected color of the product
  * @returns {Promise<void>}
+
  */
 export const addToCart = async (
   userid,
@@ -29,7 +38,6 @@ export const addToCart = async (
   try {
     const cartRef = doc(collection(db, "users", userid, "cart"), productId);
 
-    // Save product details in Firestore and preserve existing data with merge: true
     await setDoc(
       cartRef,
       {
@@ -47,3 +55,20 @@ export const addToCart = async (
     console.error("Error adding product to cart:", error.message);
   }
 };
+export const deleteFromCart = async (userid, productId) => {
+  if (!userid) {
+    throw new Error("User is not signed in");
+  }
+
+  try {
+    const cartItemRef = doc(db, "users", userid, "cart", productId);
+
+    await deleteDoc(cartItemRef);
+
+    console.log("Product successfully deleted from cart");
+  } catch (error) {
+    console.error("Error deleting product from cart:", error.message);
+  }
+};
+
+const userId = localStorage.getItem("uuid");

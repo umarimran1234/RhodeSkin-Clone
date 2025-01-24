@@ -149,10 +149,10 @@ function ProductsShowing() {
                   <div className="mt-2 mb-5 flex items-center justify-between">
                     <p className="flex items-center space-x-2">
                       <span className="text-2xl font-bold text-gray-900">
-                        ${product.price}
+                        RS {product.price}
                       </span>
                       <span className="text-sm text-gray-500 line-through">
-                        ${product.oldPrice}
+                        RS {product.oldPrice}
                       </span>
                     </p>
                   </div>

@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Thumbs } from "swiper/modules";
 import Image from "next/image";
 import { addToCart } from "@/lib/cartUtils";
+import { color } from "framer-motion";
 
 function HtmlSlider({ products, id }) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
@@ -15,9 +16,10 @@ function HtmlSlider({ products, id }) {
   const [colorss, setColor] = useState();
   const colors =
     product?.category === "HOODIE"
-      ? ["black", "lightblue", "yellow", "#FFFDD0"]
-      : product?.category ===
-        "T-SHIRT"[("black", "lightblue", "yellow", "#FFFDD0")];
+      ? ["black", "lightblue", "yellow", "#FFFDD0", "white"]
+      : product?.category === "T-SHIRT"
+      ? ["#5C4033 ", "#FFFDD0"]
+      : [];
 
   const handleAddToCart = async () => {
     try {
@@ -58,6 +60,7 @@ function HtmlSlider({ products, id }) {
               {product?.colorImages?.length > 0 &&
                 product?.colorImages.map((item, index) => (
                   <SwiperSlide
+                    key={index}
                     style={{ display: "flex", justifyContent: "center" }}
                     className="flex justify-center"
                   >

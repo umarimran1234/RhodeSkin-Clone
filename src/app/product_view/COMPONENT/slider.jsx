@@ -74,9 +74,8 @@ const Slider = () => {
                 </h5>
                 <span className="ml-3 text-lg text-indigo-600">30% off</span>
               </div>
-              <button className="bg-amber-400 py-2 px-4 rounded-lg mt-6">
-                Add to Cart
-              </button>
+              Add to Cart
+              <button className="bg-amber-400 py-2 px-4 rounded-lg mt-6"></button>
             </div>
           </div>
         </div>

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { auth } from "@/Config/firebaseConfig"; // Firebase configuration file import
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { useUser } from "@/authContaxt/authContxt";
 import { FaSpinner } from "react-icons/fa6";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   // const [error, setError] = useState("");
+
   const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -19,13 +21,11 @@ const LoginPage = () => {
     setLoading(true);
 
     try {
-      // Firebase authentication function
       const user = await signInWithEmailAndPassword(auth, email, password);
       alert("Login successful! 🎉");
       console.log(user);
       router.push("/");
       localStorage.setItem("uuid", user.user.uid);
-      // Navigate to dashboard or desired page
     } catch (err) {
       const cleanError = err.message.replace(/^Firebase:\s*/, "");
       // Show error message
@@ -88,7 +88,7 @@ const LoginPage = () => {
                   disabled={loading}
                   className="md:w-1/4 w-full py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
                 >
-                  {loading ? "Signing In..." : "SIGN IN"}
+                  {loading ? "Sign in..." : "SIGN IN"}
                 </button>
               </div>
             </form>

@@ -42,7 +42,6 @@ export const UserProvider = ({ children }) => {
   }, [user]);
   const getUserCart = async () => {
     const user = localStorage.getItem("uuid");
-    console.log(user);
 
     if (user) {
       const cartRef = collection(db, "users", user, "cart");
@@ -63,7 +62,7 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, setCarItem, cartItem, products }}
+      value={{ user, setUser, setCarItem, getUserCart, cartItem, products }}
     >
       {children}
     </UserContext.Provider>

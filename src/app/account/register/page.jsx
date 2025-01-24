@@ -6,7 +6,7 @@ import { auth, db } from "@/Config/firebaseConfig"; // Ensure firebaseConfig exp
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { collection, addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import Swal from "sweetalert2";
+
 const RegisterPage = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
