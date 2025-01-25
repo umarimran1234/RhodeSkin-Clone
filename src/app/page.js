@@ -12,6 +12,7 @@ import TravelSection from "@/components/TravelSection";
 import { AppleCardsCarouselDemo } from "@/components/ui/exemples/app-cards-carousel-exemple";
 import { CarouselDemo } from "@/components/frontCruasal";
 import ProductGrid from "@/components/productGrid";
+import MonarchsMuse from "@/components/catagori";
 export default function Home() {
   const { products } = useUser();
   console.log(products, "products");
@@ -34,15 +35,15 @@ export default function Home() {
       {/* <CarouselDemo products={products} /> */}
       <div className=" mt-6 "></div>
       {/* <ProductSlider /> */}
-
-      <AppleCardsCarouselDemo products={products} />
+      <MonarchsMuse products={products} />
+      {/* <AppleCardsCarouselDemo products={products} /> */}
       <GoodCallSection image={TSHIRTS} />
 
       <div className="container  mx-auto px-4">
         <div className="py-20">
-          <h2 className="max-w-7xl pl-4 mx-auto text-5xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+          {/* <h2 className="max-w-7xl pl-4 mx-auto text-5xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
             Other colors
-          </h2>
+          </h2> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {TSHIRTS?.map((item) =>
@@ -57,9 +58,9 @@ export default function Home() {
       <GoodCallSection image={hoodies} />
       <div className="container  mx-auto px-4">
         <div className="py-20">
-          <h2 className="max-w-7xl pl-4 mx-auto text-5xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
+          {/* <h2 className="max-w-7xl pl-4 mx-auto text-5xl md:text-5xl font-bold text-neutral-800 dark:text-neutral-200 font-sans">
             Other colors
-          </h2>
+          </h2> */}
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {hoodies?.map((item) =>

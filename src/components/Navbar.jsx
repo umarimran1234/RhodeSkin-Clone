@@ -133,8 +133,8 @@ const Navbar = () => {
               </svg>
             </button>
             <button onClick={() => setIsOpen(true)} className="flex  ">
-              <Aioutlin size={25} cursor={"pointer"} />{" "}
-              <span className="absolute text-black  w-[20] top-7 ">
+              <AiOutlineShopping size={34} cursor={"pointer"} />{" "}
+              <span className="absolute text-black text-xs rounded  bg-white  w-[20] top-10 ">
                 {cartItem?.length}
               </span>
             </button>

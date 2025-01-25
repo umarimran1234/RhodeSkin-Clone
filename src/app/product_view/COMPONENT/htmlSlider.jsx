@@ -61,6 +61,7 @@ function HtmlSlider({ products, id }) {
       Swal.fire({
         title: "PLEASE SELECT COLOR",
         icon: "info",
+        color: "black",
         timer: 2000,
         confirmButtonColor: "black",
       });

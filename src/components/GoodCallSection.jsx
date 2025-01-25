@@ -1,46 +1,95 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
 const GoodCallSection = ({ image }) => {
-  const imageSrc = image[0]?.image;
-  const [productSate, setProductState] = useState();
+  const imageSrc = image[0]?.colorImages[1];
   const navigation = useRouter();
-  const handleNavigate = (id) => {
+
+  const handleNavigate = () => {
     navigation.push(`/product_view/${image[0]?.id}`);
   };
 
-  return (
-    <div className="container mx-auto my-8">
-      {/* Central Div */}
-      <div className="flex md:flex-row-reverse flex-col-reverse">
-        {/* First Child Element */}
-        <Image
-          src={imageSrc || null}
-          alt="Travel Section Image"
-          width={1000}
-          height={1000}
-          className="md:w-1/2 w-full rounded-r-xl"
-        ></Image>
-        <div className="md:w-1/2 w-full p-8 bg-[#efefef] rounded-l-xl flex flex-col justify-end">
-          <h3 className="text-[34px] text-[#67645E] md:w-2/3 font-bold">
-            {/* Second Child Div */}
-            Zalmar latest Arrivals
-          </h3>
-          <p className="text-[#67645E] md:w-2/3 font-medium my-4">
-            {/* Stay cozy this winter with Zalmar! Check out our winter hoodies and
-            keep your Lip Case handy for your Peptide Lip Treatment. Style and
-            comfort, always with you. */}
-          </p>
+  const Heading =
+    image[0]?.category === "HOODIE" ? "Winter Collection" : "T-Shirts";
+  const para =
+    image[0]?.category === "HOODIE"
+      ? "Spend Winter with Zalmar"
+      : "Wrap Yourself in Classic Comfort";
 
-          <button
-            onClick={handleNavigate}
-            className="border lg:w-1/4 md:w-1/2 w-2/3 h-[35px] border-[#67645E] text-[#67645E] px-4 py-1 rounded-full hover:bg-white hover:text-gray-500 font-medium transition"
-          >
-            SHOP NOW
-          </button>
-        </div>
-      </div>
+  // Animation Variants
+  const textVariant = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
+  };
+
+  const backgroundVariant = {
+    hidden: { scale: 1.2, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: { duration: 1.5, ease: "easeOut" },
+    },
+  };
+
+  const buttonVariant = {
+    hover: { scale: 1.1, transition: { type: "spring", stiffness: 300 } },
+  };
+
+  // useInView Hook for Scroll Trigger
+  const { ref, inView } = useInView({
+    triggerOnce: true, // Animation triggers only once
+    threshold: 0.2, // 20% of the section should be visible to trigger
+  });
+
+  return (
+    <div
+      ref={ref}
+      className="relative mt-3 h-screen w-full flex items-center justify-center overflow-hidden"
+    >
+      {/* Background Image with Scroll Animation */}
+      <motion.div
+        className="absolute w-full h-full"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={backgroundVariant}
+      >
+        <Image
+          src={imageSrc || "/placeholder.jpg"}
+          alt="Premium Banner"
+          layout="fill"
+          objectFit="cover"
+          quality={100}
+          priority
+        />
+      </motion.div>
+
+      {/* Text Overlay with Scroll Animation */}
+      <motion.div
+        className="absolute text-center text-white"
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        variants={textVariant}
+      >
+        <h4 className="text-sm md:text-lg font-light tracking-wider uppercase">
+          {image[0]?.name}
+        </h4>
+        <h1 className="uppercase text-4xl md:text-6xl font-bold my-2">
+          {Heading}
+        </h1>
+        <p className="text-base md:text-lg font-medium">{para}</p>
+        <motion.button
+          className="mt-5 px-6 py-3 bg-white text-black font-bold uppercase rounded-lg shadow-lg hover:bg-gray-200"
+          variants={buttonVariant}
+          whileHover="hover"
+          onClick={handleNavigate}
+        >
+          Explore Now
+        </motion.button>
+      </motion.div>
     </div>
   );
 };
