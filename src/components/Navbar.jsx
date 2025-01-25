@@ -6,6 +6,7 @@ import {
   MdOutlineAddShoppingCart,
   MdShoppingCart,
 } from "react-icons/md";
+import { AiOutlineShopping } from "react-icons/ai";
 import { Ring } from "react-css-spinners/dist/Ring";
 import { deleteFromCart } from "@/lib/cartUtils";
 import { auth } from "@/Config/firebaseConfig";
@@ -132,7 +133,7 @@ const Navbar = () => {
               </svg>
             </button>
             <button onClick={() => setIsOpen(true)} className="flex  ">
-              <MdShoppingCart size={25} cursor={"pointer"} />{" "}
+              <Aioutlin size={25} cursor={"pointer"} />{" "}
               <span className="absolute text-black  w-[20] top-7 ">
                 {cartItem?.length}
               </span>

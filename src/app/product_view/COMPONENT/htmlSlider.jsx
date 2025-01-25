@@ -58,7 +58,12 @@ function HtmlSlider({ products, id }) {
     }
 
     if (!colorss) {
-      alert("Please select color");
+      Swal.fire({
+        title: "PLEASE SELECT COLOR",
+        icon: "info",
+        timer: 2000,
+        confirmButtonColor: "black",
+      });
       setLoading(false);
       return;
     }
@@ -74,7 +79,13 @@ function HtmlSlider({ products, id }) {
         selectedSize,
         colorss
       );
-      alert("Product added to cart!");
+      Swal.fire({
+        title: "Product Added in cart ",
+        color: "black",
+        icon: "su",
+        timer: 2000,
+        confirmButtonColor: "black",
+      });
 
       setIncreement(1);
       setColor(null);
