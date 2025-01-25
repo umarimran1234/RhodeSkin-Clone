@@ -9,6 +9,7 @@ import { useUser } from "@/authContaxt/authContxt";
 import Link from "next/link";
 import { auth } from "@/Config/firebaseConfig.js";
 import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 function HtmlSlider({ products, id }) {
   const [thumbsSwiper, setThumbsSwiper] = React.useState(null);
   const product = products?.find((product) => product?.id === id);
@@ -24,7 +25,7 @@ function HtmlSlider({ products, id }) {
       ? ["#5C4033 ", "#FFFDD0"]
       : [];
   const router = useRouter();
-
+  const size = ["M", "L", "XL"];
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedUUID = localStorage?.getItem("uuid");
@@ -33,14 +34,26 @@ function HtmlSlider({ products, id }) {
       }
     }
   }, []);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const [showCustomInput, setShowCustomInput] = useState(false);
+  const handleSizeClick = (size) => {
+    setSelectedSize(size);
+    setShowCustomInput(false);
+  };
+
   const handleAddToCart = async () => {
     setLoading(true);
 
     const user = auth.currentUser;
 
     if (!user) {
-      router.push("/account/login");
       setLoading(false);
+      Swal.fire({
+        title: "LOGIN ACCOUNT PLEASE",
+        icon: "info",
+        showConfirmButton: "ok",
+        confirmButtonColor: "black",
+      }).then(() => router.push("/account/login"));
       return;
     }
 
@@ -58,6 +71,7 @@ function HtmlSlider({ products, id }) {
         product?.price,
         increement,
         product?.image,
+        selectedSize,
         colorss
       );
       alert("Product added to cart!");
@@ -248,7 +262,7 @@ function HtmlSlider({ products, id }) {
                 >
                   <path d="M1 0V36" stroke="#E5E7EB" />
                 </svg>
-                <button className="flex items-center gap-1 rounded-lg bg-amber-400 py-1.5 px-2.5 w-max">
+                <button className="flex items-center gap-1 rounded-lg bg-black py-1.5 px-2.5 w-max">
                   <svg
                     width="18"
                     height="18"
@@ -278,7 +292,6 @@ function HtmlSlider({ products, id }) {
                     </defs>
                   </svg>
                   <span className="text-base font-medium text-white">
-                    {" "}
                     15% off
                   </span>
                 </button>
@@ -296,6 +309,40 @@ function HtmlSlider({ products, id }) {
                     ></span>
                   ))}
               </div>
+              <div className="mt-3 flex text-center p-1 space-x-2">
+                {size &&
+                  size.map((size, index) => (
+                    <>
+                      <span
+                        key={index}
+                        onClick={() => handleSizeClick(size)}
+                        className={`h-12 w-12 flex text-center justify-center font-bold items-center cursor-pointer active:ring-2 rounded-full border border-gray-300 ${
+                          selectedSize === size
+                            ? "bg-white text-black ring-2 ring-black" // Selected size styling
+                            : "bg-black text-white" // Default styling
+                        }`}
+                      >
+                        {size}
+                      </span>
+                    </>
+                  ))}
+                <span
+                  onClick={(e) => setShowCustomInput(true)}
+                  className="h-12 w-12 flex text-center justify-center font-bold items-center cursor-pointer active:ring-2 rounded-full border border-gray-300 
+                  bg-white text-black ring-2 ring-black"
+                >
+                  CUS
+                </span>
+              </div>
+              {showCustomInput && (
+                <input
+                  type="text"
+                  value={selectedSize}
+                  onChange={(e) => setSelectedSize(e.target.value)}
+                  placeholder="Enter size"
+                  className="w-50 mt-2 p-3 rounded-lg border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-200 text-gray-700 placeholder-gray-400"
+                />
+              )}
               <div className="grid grid-cols-3 gap-3 mb-6 max-w-sm">
                 {/* <div className="color-box group">
                   <div>

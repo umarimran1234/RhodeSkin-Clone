@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/Config/firebaseConfig"; // Firebase configuration file import
 import { sendPasswordResetEmail } from "firebase/auth";
+import Loading from "@/components/loading";
 
 const ForGotPAssword = () => {
   const [email, setEmail] = useState("");
@@ -77,7 +78,7 @@ const ForGotPAssword = () => {
                   disabled={loading}
                   className="md:w-2/4 w-full py-1 rounded-full border border-gray-600 text-[#67645E] hover:bg-gray-200 transition text-lg font-medium"
                 >
-                  {loading ? "Sending..." : "Send Reset Email"}
+                  {loading ? <Loading /> : "Send Reset Email"}
                 </button>
               </div>
             </form>

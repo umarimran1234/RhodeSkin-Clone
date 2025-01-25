@@ -12,6 +12,7 @@ import { auth } from "@/Config/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/authContaxt/authContxt";
 import Image from "next/image";
+import { Badge } from "lucide-react";
 const Navbar = () => {
   const [show, setShow] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,7 +95,7 @@ const Navbar = () => {
         } fixed w-full   z-50 top-7  transition-all duration-300   font-bold ${
           isScrolled
             ? "bg-black text-white"
-            : "bg-transparent  border-b border-white bg-opacity-40   text-white "
+            : "bg-black  border-b border-white    text-white "
         }`}
       >
         <div className="flex md:hidden justify-between items-center p-4">
@@ -130,8 +131,11 @@ const Navbar = () => {
                 )}
               </svg>
             </button>
-            <button className="flex  ">
-              <MdShoppingCart size={20} cursor={"pointer"} />
+            <button onClick={() => setIsOpen(true)} className="flex  ">
+              <MdShoppingCart size={25} cursor={"pointer"} />{" "}
+              <span className="absolute text-black  w-[20] top-7 ">
+                {cartItem?.length}
+              </span>
             </button>
           </div>
         </div>
@@ -147,7 +151,7 @@ const Navbar = () => {
             <Link href="/about">ABOUT</Link>
           </li>
           <li className=" w-full ">
-            <Link href="/OtherModules"> ARTICLES </Link>
+            {/* <Link href="/OtherModules"> ARTICLES </Link> */}
           </li>
           <li className="hidden md:block lg:px-56">
             <Link href="/" className="text-5xl">
@@ -155,9 +159,7 @@ const Navbar = () => {
               <span className="font-light">mar</span>
             </Link>
           </li>
-          <li>
-            <Link href="#search"> MODULES </Link>
-          </li>
+          <li>{/* <Link href="#search"> MODULES </Link> */}</li>
           {isLoggedIn === true ? (
             <li>
               <button onClick={handleLogout}>LOGOUT</button>

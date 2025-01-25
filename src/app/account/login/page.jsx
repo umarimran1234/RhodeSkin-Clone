@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/authContaxt/authContxt";
 import { FaSpinner } from "react-icons/fa6";
+import Swal from "sweetalert2";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,9 +23,14 @@ const LoginPage = () => {
 
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful! 🎉");
-      console.log(user);
-      router.push("/");
+      Swal.fire({
+        title: "Welcome Back",
+        icon: "success",
+        confirmButtonText: "ok",
+        buttonsStyling: {},
+      }).then(() => router.push("/"));
+      // console.log(user);
+      // router.push("/");
       if (typeof window !== "undefined") {
         localStorage.setItem("uuid", user.user.uid);
       }
@@ -121,15 +127,15 @@ const LoginPage = () => {
             <div className="mt-4 text-center space-y-2">
               <Link
                 href="/account/forgotPassword"
-                className="text-[#67645E] font-medium transition underline"
+                className="text-black font-medium transition underline"
               >
                 Forgot your password?
               </Link>
-              <p className="text-[#67645E] font-medium">
-                Don’t have an account?
+              <p className="text-black font-medium">
+                Don’t have an account?{" "}
                 <Link
                   href="/account/register"
-                  className="font-semibold text-[#67645E] underline"
+                  className="font-semibold text-black underline"
                 >
                   Sign up!
                 </Link>

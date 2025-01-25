@@ -18,6 +18,7 @@ import { useUser } from "@/authContaxt/authContxt";
  * @param {number} price - The price of the product
  * @param {number} quantity - The quantity to add
  * @param {string} imageUrl - The URL of the product image
+ * @param {string} size - The selected color of the product
  * @param {string} color - The selected color of the product
  * @returns {Promise<void>}
 
@@ -29,6 +30,7 @@ export const addToCart = async (
   price,
   quantity,
   imageUrl,
+  size,
   color
 ) => {
   if (!userid) {
@@ -45,6 +47,7 @@ export const addToCart = async (
         price,
         quantity,
         imageUrl,
+        size,
         color,
       },
       { merge: true }

@@ -14,6 +14,7 @@ import ZMLoader from "./Components/Spinner";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { deleteDoc, updateDoc } from "firebase/firestore";
 import Image from "next/image";
+import Swal from "sweetalert2";
 
 const AdminPanel = () => {
   const [products, setProducts] = useState([]);
@@ -42,11 +43,22 @@ const AdminPanel = () => {
         isSaleOut: selectedProduct?.isSaleOut,
       });
 
+      Swal.fire({
+        title: "Product update",
+        text: "zalmar",
+        icon: "success",
+        timer: 2000,
+      });
       alert("Product updated successfully!");
       closeModal();
     } catch (error) {
       console.error("Error updating product:", error);
-      alert("Failed to update product. Please try again.");
+      Swal.fire({
+        title: err,
+        text: "zalmar",
+        icon: "error",
+        timer: 2000,
+      });
     }
     setLoading(false);
   };

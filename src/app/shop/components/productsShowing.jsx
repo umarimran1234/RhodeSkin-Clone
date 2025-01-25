@@ -50,7 +50,7 @@ function ProductsShowing() {
     setLoading(true); // Start loading state
     filterProducts();
     setTimeout(() => setIsAnimating(false), 500); // Reset animation state after filter
-  }, [selectedCategory, searchQuery]);
+  }, [selectedCategory, searchQuery, products]);
 
   // Skeleton Loader Component
   const SkeletonLoader = () => (

@@ -5,6 +5,7 @@ import { useUser } from "@/authContaxt/authContxt";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Ring } from "react-css-spinners";
+import Swal from "sweetalert2";
 const Checkout = () => {
   const { cartItem, products } = useUser();
   const [email, setEmail] = useState();
@@ -102,14 +103,13 @@ const Checkout = () => {
       email,
       zip,
       state,
-
-      apparTMent,
+      products: apparTMent,
       country,
     };
     setLoading(true);
     try {
       const response = await fetch(
-        "https://formsubmit.co/ajax/umartkd989@gmail.com",
+        "https://formsubmit.co/ajax/88ede7a02c80556ad90184c7f6de85b2 ",
         {
           method: "POST",
           headers: {
@@ -120,20 +120,31 @@ const Checkout = () => {
       );
 
       if (response.ok) {
-        alert("Your order has been submitted successfully!");
-        // Optionally, reset the form
-        setFormData({
-          name: "",
-          email: "",
-          product: "",
-          quantity: "",
-          message: "",
-        });
+        Swal.fire({
+          title: "Your order has been submitted successfully!",
+          text: "thank you for choosing Zalmar",
+          icon: "success",
+          timer: 2000,
+        }).then(() => navigation.push("/"));
+
+        setLastName("");
+        setAddress("");
+        setAppartMent("");
+        setCountry("");
+        setEmail("");
+        setPhone("");
+        setState("");
+        setZip("");
+        setcity("");
       } else {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("There was an error submitting your order.");
+      Swal.fire({
+        title: "Error please Check your Connections",
+        icon: "error",
+        timer: 2000,
+      });
     }
     setLoading(false);
   };

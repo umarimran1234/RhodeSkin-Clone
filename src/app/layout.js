@@ -4,7 +4,8 @@ import Footer from "@/components/Footer";
 import Announcement from "@/components/Announcement";
 import Navbar from "@/components/Navbar";
 import HeaderAndFooter from "@/components/HeaderFooter";
-
+import "sweetalert2/dist/sweetalert2.min.css";
+import Image from "next/image";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -32,10 +33,11 @@ export default function RootLayout({ children }) {
             target="_blank"
             className="bg-green-500 rounded-full w-14 h-14 flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
           >
-            <img
+            <Image
+              height={20}
+              width={20}
               src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
               alt="WhatsApp"
-              className="w-8 h-8"
             />
           </a>
         </div>
