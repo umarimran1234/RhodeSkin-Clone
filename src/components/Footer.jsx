@@ -5,7 +5,7 @@ import { FaFacebook } from "react-icons/fa6";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 container mx-auto rounded-xl text-[#67645E]">
+    <footer className="text-white    bg-black">
       <div className="max-w-screen-xl mx-auto px-4 py-8 md:py-12">
         {/* Logo Section */}
         {/* <Image
@@ -16,14 +16,14 @@ const Footer = () => {
           className="mx-auto"
         /> */}
         <div className="flex justify-center items-center ">
-          <h1 className=" text-black text-7xl lg:text-9xl  ">
-            <span className=" text-black font-bold "> zal</span>mar
+          <h1 className=" text-white text-7xl lg:text-9xl  ">
+            <span className=" text-white font-bold "> zal</span>mar
           </h1>
         </div>
 
         <div className="mt-8 grid grid-cols-1 lg:grid-cols-6 md:grid-cols-3 gap-4 border-t-2 pt-8 border-black font-medium">
           {/* Email Subscription Section */}
-          <div className="md:col-span-2 md:border-r-2 border-black">
+          <div className="md:col-span-2 md:border-r-2 border-white">
             <p className="">Join us on the journey to effortless style.</p>
             <p className="mt-2 w-11/12">
               Elevate your inbox with fashion tips, styling tricks, and
@@ -55,12 +55,19 @@ const Footer = () => {
               </li>
               <li>
                 <a href="/account/login" className="hover:underline">
-                  Account
+                  About
                 </a>
               </li>
+
+              {/* <li>
+                <a href="/account/login" className="hover:underline">
+                  Account
+                </a>
+              </li> */}
+
               <li>
                 <Link href="#" className="hover:underline">
-                  Other Modules
+                  Contact us
                 </Link>
               </li>
               {/* <li>
@@ -131,7 +138,7 @@ const Footer = () => {
             <h2 className="font-bold mb-4">OFFICIAL</h2>
             <ul className="space-y-2">
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/privacy" className="hover:underline">
                   Privacy
                 </a>
               </li>
@@ -146,20 +153,20 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:underline">
+                <a href="/FAQ" className="hover:underline">
                   FAQ
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:underline">
+              {/* <li>
+                <Link href="/contact_us" className="hover:underline">
                   Contact
-                </a>
-              </li>
-              <li>
+                </Link>
+              </li> */}
+              {/* <li>
                 <a href="#" className="hover:underline">
                   Events
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -207,13 +214,14 @@ const Footer = () => {
                   © codesphare Innovation {new Date().getFullYear()}
                 </Link>
               </li>
-              <li>
+              <li className="flex justify-start lg:justify-center items-center">
                 <Image
-                  src={"/zalmarlogo.PNG"}
+                  src={"/zalmarlogo.jpg"}
                   width={1000}
                   height={1000}
                   alt="After Pay Image"
                 ></Image>
+                {/* <h1 className=" text-[9rem] "> ZM </h1> */}
               </li>
             </ul>
           </div>

@@ -152,7 +152,7 @@ const Navbar = () => {
             <Link href="/about">ABOUT</Link>
           </li>
           <li className=" w-full ">
-            {/* <Link href="/OtherModules"> ARTICLES </Link> */}
+            <Link href="/OtherModules"> CONTACT US </Link>
           </li>
           <li className="hidden md:block lg:px-56">
             <Link href="/" className="text-5xl">
@@ -256,7 +256,10 @@ const Navbar = () => {
                   *shipping, taxes, and discounts calculated at checkout.
                 </p> */}
                 <Link href={"/checkout"}>
-                  <button className="w-full mt-3 bg-black text-white py-3 rounded text-sm font-medium hover:bg-gray-800">
+                  <button
+                    onClick={() => setIsOpen(false)}
+                    className="w-full mt-3 bg-black text-white py-3 rounded text-sm font-medium hover:bg-gray-800"
+                  >
                     CHECKOUT
                   </button>
                 </Link>

@@ -39,10 +39,9 @@ const GoodCallSection = ({ image }) => {
     hover: { scale: 1.1, transition: { type: "spring", stiffness: 300 } },
   };
 
-  // useInView Hook for Scroll Trigger
   const { ref, inView } = useInView({
-    triggerOnce: true, // Animation triggers only once
-    threshold: 0.2, // 20% of the section should be visible to trigger
+    triggerOnce: true,
+    threshold: 0.2,
   });
 
   return (
@@ -58,7 +57,7 @@ const GoodCallSection = ({ image }) => {
         variants={backgroundVariant}
       >
         <Image
-          src={imageSrc || "/placeholder.jpg"}
+          src={imageSrc || ""}
           alt="Premium Banner"
           layout="fill"
           objectFit="cover"
@@ -82,7 +81,7 @@ const GoodCallSection = ({ image }) => {
         </h1>
         <p className="text-base md:text-lg font-medium">{para}</p>
         <motion.button
-          className="mt-5 px-6 py-3 bg-white text-black font-bold uppercase rounded-lg shadow-lg hover:bg-gray-200"
+          className="mt-5 px-6 py-3 bg-transparent  font-bold uppercase  shadow-lg border-white border text-white "
           variants={buttonVariant}
           whileHover="hover"
           onClick={handleNavigate}

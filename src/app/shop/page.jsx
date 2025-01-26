@@ -9,10 +9,8 @@ const StoreSection = () => {
   const { products } = useUser();
   const [selectedCategory, setSelectedCategory] = useState("");
 
-  // Categories list for filter
   const categories = ["Hoodie", "T-shirt", "Full Slip", "Half Slip"];
 
-  // Filter products based on selected category
   const filteredProducts = selectedCategory
     ? products?.filter((item) => item.category === selectedCategory)
     : products;
