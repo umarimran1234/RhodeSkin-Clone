@@ -17,11 +17,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Add weight option for Quantico font
 const quantico = Quantico({
   variable: "--font-quantico",
   subsets: ["latin"],
-  weight: ["400", "700"], // Specify supported weights
+  weight: ["400", "700"],
 });
 
 export const metadata = {

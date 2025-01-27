@@ -152,7 +152,7 @@ const Navbar = () => {
             <Link href="/about">ABOUT</Link>
           </li>
           <li className=" w-full ">
-            <Link href="/OtherModules"> CONTACT US </Link>
+            <Link href="/contact_us"> CONTACT US </Link>
           </li>
           <li className="hidden md:block lg:px-56">
             <Link href="/" className="text-5xl">

@@ -33,7 +33,7 @@ const Footer = () => {
               <input
                 type="email"
                 placeholder="Email Address"
-                className="flex-1 px-4 py-2 border-r border-gray-300 rounded-l-md focus:outline-none focus:ring focus:ring-gray-300 placeholder:text-[#67645E] placeholder:text-[18px] md:placeholder:text-left placeholder:text-center"
+                className="flex-1 text-black px-4 py-2 border-r border-gray-300 rounded-l-md focus:outline-none focus:ring focus:ring-gray-300 placeholder:text-[#67645E] placeholder:text-[18px] md:placeholder:text-left placeholder:text-center"
               />
               <button className="px-4 py-2 md:mt-0 mt-2 bg-white text-[#67645E] font-semibold rounded-r-md hover:bg-gray-700">
                 SUBSCRIBE
@@ -66,7 +66,7 @@ const Footer = () => {
               </li> */}
 
               <li>
-                <Link href="#" className="hover:underline">
+                <Link href="/contact_us" className="hover:underline">
                   Contact us
                 </Link>
               </li>
@@ -142,11 +142,11 @@ const Footer = () => {
                   Privacy
                 </a>
               </li>
-              <li>
-                <a href="#" className="hover:underline">
+              {/* <li>
+                <Link href="/" className="hover:underline">
                   Terms
-                </a>
-              </li>
+                </Link>
+              </li> */}
               <li>
                 <a href="#" className="hover:underline">
                   Accessibility
