@@ -14,7 +14,7 @@ const Checkout = () => {
   const [firstName, setFirstName] = useState();
   const [LastName, setLastName] = useState();
   const navigation = useRouter();
-  const [apparTMent, setAppartMent] = useState();
+  const [apartMeant, setApartMent] = useState();
   const [city, setcity] = useState();
   const [userID, setUserID] = useState(null);
   const [state, setState] = useState();
@@ -40,7 +40,6 @@ const Checkout = () => {
       }
     }
   }, [navigation]);
-  console.log(userID, "userId");
 
   //   <div style="font-family: Arial, sans-serif; color: #333; padding: 20px; line-height: 1.5;">
   //     <h2 style="color: #007BFF;">New Order Received</h2>
@@ -93,23 +92,31 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formattedProducts = cartItem;
+    const formattedProducts = cartItem
+      .map(
+        (product) =>
+          `Product: ${product?.productName}, Quantity: ${product?.quantity}, Price: ${product?.price} PKR , Size: ${product?.size} PKR , color: ${product?.color}  `
+      )
+      .join("\n");
 
     const formData = {
       firstName,
+      total: total,
       LastName,
       address,
+      apartMeant,
       Phone,
       email,
       zip,
       state,
-      products: apparTMent,
+      _template: "table",
+      products: formattedProducts,
       country,
     };
     setLoading(true);
     try {
       const response = await fetch(
-        "https://formsubmit.co/ajax/88ede7a02c80556ad90184c7f6de85b2 ",
+        "https://formsubmit.co/ajax/ec6c088814448c0c8705d40aaff75c20",
         {
           method: "POST",
           headers: {
@@ -129,7 +136,7 @@ const Checkout = () => {
 
         setLastName("");
         setAddress("");
-        setAppartMent("");
+        setApartMent("");
         setCountry("");
         setEmail("");
         setPhone("");
