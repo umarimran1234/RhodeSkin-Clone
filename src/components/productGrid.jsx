@@ -37,10 +37,7 @@ function ProductGrid({ product, item, index }) {
            duration-500 ease-out hover:scale-105 hover:shadow-xl`}
       >
         {/* Product Image */}
-        <Link
-          className="relative flex h-80 overflow-hidden"
-          href={`/product_view/${[product?.id]}`}
-        >
+        <div className="relative flex h-80 overflow-hidden">
           <div className="flex">
             <Image
               width={300}
@@ -52,10 +49,10 @@ function ProductGrid({ product, item, index }) {
           </div>
           <div className="absolute bottom-0 mb-4 flex w-full justify-center space-x-4">
             <div className="h-3 w-3 rounded-full border-2 border-white bg-white"></div>
-            <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
-            <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
+            {/* <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div>
+            <div className="h-3 w-3 rounded-full border-2 border-white bg-transparent"></div> */}
           </div>
-        </Link>
+        </div>
 
         {/* Product Details */}
         <div className="mt-4 px-5 pb-5">
@@ -67,15 +64,18 @@ function ProductGrid({ product, item, index }) {
           <div className="mt-2 mb-5 flex items-center justify-between">
             <p className="flex items-center space-x-2">
               <span className="text-2xl font-bold text-gray-900">
-                RS {product?.price}
+                RS {String(product?.price) === "2625" && "2,625"}
               </span>
-              <span className="text-sm text-gray-500 line-through">
-                RS{product?.oldPrice}
+              <span className="text-md text-black line-through">
+                RS {String(product?.oldPrice) === "3500" && "3,500"}
               </span>
             </p>
           </div>
           {/* Add to Cart Button */}
-          <button className="flex items-center justify-center bg-gray-900 px-4 py-2 text-sm text-white transition-transform transform hover:scale-110 hover:bg-gray-700 rounded duration-300">
+          <Link
+            href={`/product_view/${[product?.id]}`}
+            className="flex items-center justify-center bg-gray-900 px-4 py-2 text-sm text-white transition-transform transform hover:scale-110 hover:bg-gray-700 rounded duration-300"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="mr-2 h-5 w-5"
@@ -86,7 +86,7 @@ function ProductGrid({ product, item, index }) {
               <circle cx="10" cy="8" r="2" />
             </svg>
             View Product
-          </button>
+          </Link>
         </div>
       </div>
     </>

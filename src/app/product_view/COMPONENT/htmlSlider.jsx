@@ -114,8 +114,11 @@ function HtmlSlider({ products, id }) {
               {/* Main Slider */}
               <Swiper
                 modules={[Navigation, Thumbs]}
-                navigation
+                navigation={false}
+                pagination={{ clickable: true }}
                 thumbs={{ swiper: thumbsSwiper }}
+                slidesPerView={1}
+                spaceBetween={10}
                 className="main-slide-carousel"
                 loop
               >
@@ -187,7 +190,7 @@ function HtmlSlider({ products, id }) {
                       height={600}
                       width={200}
                       alt="Thumbnail"
-                      className="cursor-pointer rounded-xl transition-all duration-500 w-40"
+                      className="cursor-pointer rounded-xl  transition-all duration-500 w-40"
                     />
                   </SwiperSlide>
                 ))}
@@ -265,7 +268,12 @@ function HtmlSlider({ products, id }) {
                 <div className="flex flex-col min-[400px]:flex-row min-[400px]:items-center mb-8 gap-y-3">
                   <div className="flex items-center">
                     <h5 className="font-manrope font-semibold text-2xl leading-9 text-gray-900 ">
-                      RS {String(product?.price) === "2625" ? "2,625" : null}
+                      RS{" "}
+                      {String(product?.price) === "2625"
+                        ? "2,625"
+                        : String(product?.price) === "1750"
+                        ? "1,750"
+                        : null}
                     </h5>
                     <del className="ml-3 font-semibold text-lg text-black">
                       RS {product?.oldPrice}
@@ -318,11 +326,15 @@ function HtmlSlider({ products, id }) {
                 <p className="font-medium text-lg text-gray-900 mb-2">Color</p>
                 <div className="mt-3 flex space-x-2">
                   {colors &&
-                    colors?.map((color, index) => (
+                    colors.map((color, index) => (
                       <span
                         key={index}
                         onClick={() => setColor(color)}
-                        className="h-6 w-6 cursor-pointer active:ring-2  rounded-full border border-gray-300"
+                        className={`h-8 w-8 cursor-pointer rounded-full border border-gray-300 transition-all ${
+                          colorss === color
+                            ? "ring-2 ring-black"
+                            : "hover:ring-2 hover:ring-gray-400"
+                        }`}
                         style={{ backgroundColor: color }}
                         title={color}
                       ></span>
