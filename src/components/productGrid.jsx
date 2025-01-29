@@ -8,6 +8,29 @@ function ProductGrid({ product, item, index }) {
 
   return (
     <>
+      {/* <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Link
+          href={`/product_view/${product?.id}`}
+          key={index}
+          className="group relative overflow-hidden border "
+        >
+          <Image
+            src={item}
+            alt={item?.name}
+            width={300}
+            height={400}
+            className="w-full h-full  transition-transform duration-300 group-hover:scale-110"
+          />
+          <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black via-transparent to-transparent text-white p-4">
+            <h3 className="text-lg font-bold uppercase">{product?.name}</h3>
+            <div className="text-right text-sm font-medium mt-2">
+              <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                →
+              </span>
+            </div>
+          </div>
+        </Link>
+      </div> */}
       <div
         key={index}
         className={`group flex flex-col overflow-hidden border border-gray-100 bg-white shadow-md rounded-lg transition-all transform 
