@@ -12,9 +12,8 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const { isLogin, setIsLoggedIn } = useUser();
   const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState("");
-
   const router = useRouter();
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,15 +26,21 @@ const LoginPage = () => {
         title: "Welcome Back",
         icon: "success",
         confirmButtonText: "ok",
-        buttonsStyling: {},
+        confirmButtonColor: "black",
       }).then(() => router.push("/"));
       // console.log(user);
       // router.push("/");
       if (typeof window !== "undefined") {
         localStorage.setItem("uuid", user.user.uid);
       }
+      setIsLoggedIn(true);
     } catch (err) {
-      const cleanError = err.message.replace(/^Firebase:\s*/, "");
+      const cleanError =
+        err.message
+          .match(/\(([^)]+)\)/)?.[1]
+          ?.split("/")[1]
+          .replace(/-/g, " ") || "Something went wrong";
+
       // Show error message
       setError(cleanError || "Failed to log in. Please try again.");
     } finally {

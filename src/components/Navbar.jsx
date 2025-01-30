@@ -13,6 +13,7 @@ import { auth } from "@/Config/firebaseConfig";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/authContaxt/authContxt";
 import Image from "next/image";
+
 import { Badge } from "lucide-react";
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -20,9 +21,9 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [userid, setUserId] = useState();
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState();
+  // const [isLoggedIn, setIsLoggedIn] = useState();
   const Router = useRouter();
-  const { cartItem, getUserCart } = useUser();
+  const { cartItem, getUserCart, setIsLoggedIn, isLogin } = useUser();
 
   const total = cartItem?.reduce((acc, item) => acc + item?.price, 0);
 
@@ -38,7 +39,7 @@ const Navbar = () => {
       setUserId(uuid);
       setIsLoggedIn(!!uuid);
     }
-  }, [userid]);
+  }, [userid, isLogin]);
 
   const handlDeleteCart = async (userid, itemId) => {
     try {
@@ -161,7 +162,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li>{/* <Link href="#search"> MODULES </Link> */}</li>
-          {isLoggedIn === true ? (
+          {isLogin === true ? (
             <li>
               <button onClick={handleLogout}>LOGOUT</button>
             </li>
@@ -214,7 +215,7 @@ const Navbar = () => {
                             alt="productITem"
                             width={100}
                             height={100}
-                            src={item?.imageUrl}
+                            src={item?.imageUrl || ""}
                           />
                         </div>
                         <p className="font-medium text-black text-sm ">

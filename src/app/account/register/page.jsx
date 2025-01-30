@@ -47,7 +47,12 @@ const RegisterPage = () => {
       setError("");
     } catch (err) {
       console.error(err);
-      const cleanError = err.message.replace(/^Firebase:\s*/, "");
+      const cleanError =
+        err.message
+          .match(/\(([^)]+)\)/)?.[1]
+          ?.split("/")[1]
+          .replace(/-/g, " ") || "Something went wrong";
+
       // Show error message
 
       setError(cleanError || "Failed to create account.");

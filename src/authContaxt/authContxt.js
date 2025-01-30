@@ -13,6 +13,7 @@ export const UserProvider = ({ children }) => {
   const [idOfUser, setIdOfUser] = useState(null);
   const [cartItem, setCarItem] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isLogin, setIsLoggedIn] = useState(false);
   const db = getFirestore(app);
 
   useEffect(() => {
@@ -69,7 +70,16 @@ export const UserProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setUser, setCarItem, getUserCart, cartItem, products }}
+      value={{
+        user,
+        setUser,
+        setCarItem,
+        getUserCart,
+        cartItem,
+        products,
+        isLogin,
+        setIsLoggedIn,
+      }}
     >
       {children}
     </UserContext.Provider>

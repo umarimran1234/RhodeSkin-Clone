@@ -36,7 +36,7 @@ const Checkout = () => {
       if (storedUUID) {
         setUserID(storedUUID);
       } else {
-        navigation.push("/account/login");
+        navigation.push("/account/register");
       }
     }
   }, [navigation]);

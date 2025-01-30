@@ -64,10 +64,20 @@ function ProductGrid({ product, item, index }) {
           <div className="mt-2 mb-5 flex items-center justify-between">
             <p className="flex items-center space-x-2">
               <span className="text-2xl font-bold text-gray-900">
-                RS {String(product?.price) === "2625" && "2,625"}
+                RS{" "}
+                {product?.price === 2625
+                  ? "2,625"
+                  : product?.price === 1750
+                  ? "1,750"
+                  : product?.price}
               </span>
               <span className="text-md text-black line-through">
-                RS {String(product?.oldPrice) === "3500" && "3,500"}
+                RS{" "}
+                {String(product?.oldPrice) === "3500"
+                  ? "3,500"
+                  : String(product?.oldPrice) === "2050"
+                  ? "2,050"
+                  : product?.price}
               </span>
             </p>
           </div>
