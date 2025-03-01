@@ -2,7 +2,7 @@ import Link from "next/link";
 import { FaArrowDown } from "react-icons/fa6";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-const HeroSection = ({ title, paragraph, button }) => {
+const HeroSection = ({ title, paragraph, button, url }) => {
   const buttonVariant = {
     hover: { scale: 1.1, transition: { type: "spring", stiffness: 300 } },
   };
@@ -12,7 +12,7 @@ const HeroSection = ({ title, paragraph, button }) => {
     visible: { opacity: 1, y: 0, transition: { duration: 1, ease: "easeOut" } },
   };
   const handleNavigate = () => {
-    router.push("/shop");
+    router.push(`${url}`);
   };
   const backgroundVariant = {
     hidden: { scale: 1.2, opacity: 0 },

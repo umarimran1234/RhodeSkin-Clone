@@ -20,14 +20,14 @@ const UpdateProductModal = ({ isOpen, onClose, productId, existingData }) => {
         isSaleOut,
       });
       alert("Product updated successfully!");
-      onClose(); // Close the modal after updating
+      onClose();
     } catch (error) {
       console.error("Error updating product:", error);
       alert("Failed to update product. Please try again.");
     }
   };
 
-  if (!isOpen) return null; // Render nothing if the modal is not open
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

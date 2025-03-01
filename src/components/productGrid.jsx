@@ -77,7 +77,7 @@ function ProductGrid({ product, item, index }) {
                   ? "3,500"
                   : String(product?.oldPrice) === "2050"
                   ? "2,050"
-                  : product?.price}
+                  : product?.oldPrice}
               </span>
             </p>
           </div>

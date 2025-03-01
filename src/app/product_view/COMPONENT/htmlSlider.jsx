@@ -27,9 +27,9 @@ function HtmlSlider({ products, id }) {
   const colors =
     product?.category === "HOODIE"
       ? ["black", "lightblue", "yellow", "#FFFDD0", "white"]
-      : product?.category === "T-SHIRT"
+      : product?.category === "T-SHIRT" 
       ? ["#5C4033 ", "#FFFDD0"]
-      : [];
+      : product?.category === "DROP-SHOULDER" ? [""] :  [];
   const router = useRouter();
   const size = ["M", "L", "XL"];
   useEffect(() => {
@@ -111,7 +111,6 @@ function HtmlSlider({ products, id }) {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2">
             <div className="slider-box w-full  h-full max-lg:mx-auto mx-0">
-              {/* Main Slider */}
               <Swiper
                 modules={[Navigation, Thumbs]}
                 navigation={false}
@@ -122,13 +121,6 @@ function HtmlSlider({ products, id }) {
                 className="main-slide-carousel"
                 loop
               >
-                {/* <SwiperSlide>
-                <img
-                  src="https://pagedone.io/asset/uploads/1700472379.png"
-                  alt="Summer Travel Bag image"
-                  className="max-lg:mx-auto rounded-2xl object-cover"
-                />
-              </SwiperSlide> */}
                 {product?.colorImages?.length > 0 &&
                   product?.colorImages.map((item, index) => (
                     <SwiperSlide
@@ -138,13 +130,13 @@ function HtmlSlider({ products, id }) {
                     >
                       <Image
                         height={200}
-                        width={300}
+                        width={600}
                         key={index}
                         // width={300}
                         // height={300}
                         src={item || ""}
                         alt="Summer Travel Bag image"
-                        className=" w-[25rem] flex justify-center "
+                        className="  flex justify-center "
                       />
                     </SwiperSlide>
                   ))}
@@ -273,7 +265,7 @@ function HtmlSlider({ products, id }) {
                         ? "2,625"
                         : String(product?.price) === "1750"
                         ? "1,750"
-                        : null}
+                        : product?.price}
                     </h5>
                     <del className="ml-3 font-semibold text-lg text-black">
                       RS {product?.oldPrice}
@@ -289,7 +281,7 @@ function HtmlSlider({ products, id }) {
                   >
                     <path d="M1 0V36" stroke="#E5E7EB" />
                   </svg>
-                  <button className="flex items-center gap-1 rounded-lg bg-black py-1.5 px-2.5 w-max">
+                  <button className="flex items-center gap-1 rounded-lg bg-yellow-400 py-1.5 px-2.5 w-max">
                     <svg
                       width="18"
                       height="18"
@@ -319,7 +311,17 @@ function HtmlSlider({ products, id }) {
                       </defs>
                     </svg>
                     <span className="text-base font-medium text-white">
-                      25% off
+                      {product.category === "FOUR-POCKET"
+                        ? "40% off"
+                        : product?.category === "HOODIE"
+                        ? "25% off"
+                        : product?.category === "FULL-SLIP"
+                        ? "22% off"
+                        : product?.category === "HALF-SLIP"
+                        ? "25% off"
+                        : product.category === "DROP-SHOULDER"
+                        ? "28% off"
+                        : product?.category === "TROUSERS" && "35% off"}
                     </span>
                   </button>
                 </div>

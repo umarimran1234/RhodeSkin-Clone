@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const GoodCallSection = ({ image }) => {
-  const imageSrc = image[0]?.colorImages[1];
+  const imageSrc = image[0]?.colorImages[2];
   const navigation = useRouter();
 
   const handleNavigate = () => {
@@ -14,7 +14,17 @@ const GoodCallSection = ({ image }) => {
   };
 
   const Heading =
-    image[0]?.category === "HOODIE" ? "Winter Collection" : "T-Shirts";
+    image[0]?.category === "HOODIE"
+      ? "Winter Collection"
+      : image[0]?.category === "FOUR-POCKET"
+      ? "Four Pocket Full Sleeve T Shirt"
+      : image[0]?.category === "TROUSERS"
+      ? "Trousers For Mans"
+      : image[0]?.category === "HALF-SLIP"
+      ? "Stylish T-Shirts"
+      : image[0]?.category === "FULL-SLIP"
+      ? "Stylish Full Sleeve T-Shirt"
+      : "T-Shirts";
   const para =
     image[0]?.category === "HOODIE"
       ? "Spend Winter with Zalmar"

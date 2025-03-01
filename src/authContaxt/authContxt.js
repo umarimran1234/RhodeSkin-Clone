@@ -21,7 +21,7 @@ export const UserProvider = ({ children }) => {
       setUser(currentUser);
     });
 
-    return () => unsubscribeAuth(); // Cleanup on unmount
+    return () => unsubscribeAuth(); 
   }, []);
 
   useEffect(() => {

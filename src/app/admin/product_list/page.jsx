@@ -38,7 +38,7 @@ const AdminPanel = () => {
       const productRef = doc(db, "products", selectedProduct?.id);
       await updateDoc(productRef, {
         name: selectedProduct?.name,
-        price: parseFloat(selectedProduct?.price),
+        price: selectedProduct?.price,
         isActive: selectedProduct?.isActive,
         isSaleOut: selectedProduct?.isSaleOut,
       });
@@ -115,14 +115,11 @@ const AdminPanel = () => {
     const { name, value, type, checked, files } = e.target;
 
     if (name === "image") {
-      // If the field is for front image
       const selectedImg = files[0];
       if (selectedImg) {
-        // Upload the front image
         uploadImageToImageBB(selectedImg, "front");
       }
     } else if (name === "colorImages") {
-      // If the field is for color images (multiple images)
       const selectedImages = Array.from(files);
       selectedImages.forEach((img) => uploadImageToImageBB(img, "color"));
     } else {
@@ -288,6 +285,9 @@ const AdminPanel = () => {
                   <option value="T-SHIRT">T-shirt</option>
                   <option value="FULL-SLIP">Full Slip</option>
                   <option value="HALF-SLIP">Half Slip</option>
+                  <option value="FOUR-POCKET">FOUR POCKET</option>
+                  <option value="DROP-SHOULDER">DROP SHOULDER</option>
+                  <option value="TROUSERS">TROUSERS</option>
                   {/* Add more options as needed */}
                 </select>
               </div>
@@ -362,7 +362,7 @@ const AdminPanel = () => {
               <div>
                 <label className="block font-medium mb-2">Price</label>
                 <input
-                  type="number"
+                  type="text"
                   name="price"
                   value={newProduct.price}
                   onChange={handleInputChange}
@@ -374,7 +374,7 @@ const AdminPanel = () => {
               <div>
                 <label className="block font-medium mb-2">Old prices</label>
                 <input
-                  type="number"
+                  type="text"
                   name="oldprice"
                   value={newProduct.old}
                   onChange={handleInputChange}
@@ -562,7 +562,7 @@ const AdminPanel = () => {
                 Price
               </label>
               <input
-                type="number"
+                type="text"
                 value={selectedProduct?.price}
                 onChange={(e) => {
                   setSelectedProduct({
